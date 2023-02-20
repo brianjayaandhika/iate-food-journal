@@ -12,6 +12,7 @@ body {
   font-size: 32px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 code {
@@ -22,9 +23,10 @@ code {
 
 :root {
   --green-tp: #03ac0e; /* Hijau Tokopedia */
-  --green-uc: #25b34d; /* Hijau Union Coconut */
 }
 
-h1 {
-  color: var(--green-tp);
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }

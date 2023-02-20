@@ -1,0 +1,47 @@
+.footer-section {
+  background: rgba(0, 0, 0, 1);
+  border-top: 2px solid rgba(3, 172, 14, 0.1);
+  border-bottom: 2px solid rgba(3, 172, 14, 0.1);
+}
+
+.footer-section ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-copyright-text {
+  font-size: 1.2rem;
+  display: flex;
+  align-items: start;
+
+  color: white;
+  justify-content: center;
+  opacity: 0.8;
+}
+
+.footer-item-title {
+  color: white;
+  font-size: 20px;
+  font-family: "Splines Sans", sans-serif;
+  line-height: 38px;
+}
+
+.footer-item {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  font-family: "Splines Sans", sans-serif;
+  opacity: 0.8;
+}
+
+.footer-item:hover {
+  color: white;
+  opacity: 1;
+}
+
+.footer-icon {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
