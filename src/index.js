@@ -1,14 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
-import LandingPage from "./LandingPage";
-import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
+
+import "./index.css";
+
+import LandingPage from "./components/LandingPage/LandingPage";
+import FoodList from "./components/FoodList/FoodList";
+
+import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // <React.StrictMode>
-  <LandingPage />
+  <>
+    <LandingPage />
+    <FoodList />
+  </>
   // </React.StrictMode>
 );
 

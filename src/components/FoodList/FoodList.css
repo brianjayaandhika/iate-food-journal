@@ -1,0 +1,76 @@
+/* Favorite Section Styles */
+.foodlist-section {
+  background: rgba(0, 0, 0, 1);
+  border-top: 2px solid rgba(3, 172, 14, 0.1);
+}
+
+.foodlist-title {
+  color: white;
+  text-align: center;
+}
+
+.foodlist-img {
+  width: 300px;
+  height: 250px;
+  border-radius: 16px;
+
+  transition: scale 0.75ms box-shadow 0.75ms;
+
+  cursor: pointer;
+}
+
+.foodlist-img:hover {
+  box-shadow: 0px 1px 2px 0px rgba(3, 172, 14, 0.8), 1px 2px 4px 0px rgba(3, 172, 14, 0.8), 2px 4px 8px 0px rgba(3, 172, 14, 0.8), 2px 4px 16px 0px rgba(3, 172, 14, 0.8);
+  scale: 1.02;
+}
+
+.foodlist-img:hover + .foodlist-text {
+  opacity: 1;
+}
+
+.foodlist-text {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 51px;
+  color: white;
+  opacity: 0.7;
+  text-decoration: none;
+
+  transition: opacity 0.75ms color 0.75ms;
+
+  padding-left: 12px;
+}
+
+.foodlist-rates {
+  gap: 24px;
+  display: flex;
+  justify-content: start;
+}
+
+.foodlist-rates-text {
+  color: white;
+  font-size: 24px;
+  margin-top: -25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.foodlist-heart-icon {
+  cursor: pointer;
+}
+
+.foodlist-heart-icon:hover {
+  scale: 1.2;
+}
+
+/* End of Favorite Section Styles */
+
+@media screen and (min-width: 576px) and (max-width: 767px) {
+  .foodlist-img {
+    width: 250px;
+    height: 200px;
+  }
+} ;

@@ -1,10 +1,50 @@
 import "./LandingPage.css";
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
+import { useState, useEffect } from "react";
 import { Container, Button, Row, Col } from "react-bootstrap";
 import { FaStar, FaBookmark, FaPlusCircle } from "react-icons/fa";
+import axios from "axios";
 
 const LandingPage = () => {
+  const [foods, setFoods] = useState([]);
+  const [mostFavorite, setMostFavorite] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Get All Foods
+  const getFoodList = () => {
+    axios({
+      method: "get",
+      url: `${process.env.REACT_APP_BASEURL}/api/v1/foods`,
+      headers: {
+        Authorization: `Bearer ${process.env.REACT_APP_JWTTOKEN}`,
+        apiKey: `${process.env.REACT_APP_APIKEY}`,
+      },
+    })
+      .then(function (response) {
+        setFoods(response.data.data);
+        console.log(response.data.data);
+        setIsLoading(false);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  // Get 3 Favorite Food
+  const getMostFavorite = () => {
+    setMostFavorite(foods.sort((a, b) => b.totalLikes - a.totalLikes).filter((e, i) => i < 3));
+    // state mostFavorite berisi 3 food dengan total likes terbanyak
+  };
+
+  useEffect(() => {
+    getFoodList();
+
+    if (!isLoading) {
+      getMostFavorite();
+    }
+  }, [isLoading]);
+
   return (
     <>
       {/* Intro Section */}
@@ -22,29 +62,32 @@ const LandingPage = () => {
         </div>
       </div>
       {/* End of Intro Section */}
-
       {/* Favorite Section */}
+
       <div className="favorite-section pt-4 pb-5">
         <Container>
           <h1 className="favorite-title mb-5 pt-3">Most Liked Foods</h1>
-          <Row>
-            <Col md={12} lg={12} xl={4} className="d-flex flex-column align-items-center mb-md-4 mb-4">
-              <img src="https://source.unsplash.com/random/?food&1/" className="favorite-img" />
-              <p className="favorite-text mt-3">Sushi</p>
-            </Col>
-            <Col sm={12} md={6} lg={6} xl={4} className="d-flex flex-column align-items-center mb-4">
-              <img src="https://source.unsplash.com/random/?food&2/" className="favorite-img" />
-              <p className="favorite-text mt-3">Pizza</p>
-            </Col>
-            <Col sm={12} md={6} lg={6} xl={4} className="d-flex flex-column align-items-center">
-              <img src="https://source.unsplash.com/random/?food&3/" className="favorite-img" />
-              <p className="favorite-text mt-3">Spaghetti</p>
-            </Col>
+          <Row className="favorite-row">
+            {mostFavorite.map((food, i) => {
+              return (
+                <Col
+                  key={i}
+                  sm={12}
+                  md={6}
+                  xl={4}
+                  className="d-flex flex-column align-items-center 
+                 mb-md-4 mb-4 "
+                >
+                  <img src={food.imageUrl} className="favorite-img" />
+                  <p className="favorite-text mt-3">{food.name}</p>
+                </Col>
+              );
+            })}
           </Row>
         </Container>
       </div>
-      {/* End of Favorite Section */}
 
+      {/* End of Favorite Section */}
       {/* Feature Section */}
       <div className="feature-section pt-5 pb-5">
         <Container>
@@ -80,7 +123,6 @@ const LandingPage = () => {
         </Container>
       </div>
       {/* End of Feature Section */}
-
       {/* Footer Section */}
       <Footer />
       {/* End of Footer Section */}
