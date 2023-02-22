@@ -55,7 +55,13 @@ const LandingPage = () => {
             <h1 className="intro-brand">iAte</h1>
             <p className="intro-text mb-5">Look, cook, and enjoy.</p>
             <p className="intro-text mb-4">Recipes from around the world.</p>
-            <Button className="btn btn-success" style={{ fontSize: "18px" }}>
+            <Button
+              onClick={() => {
+                window.location.assign(`/foods`);
+              }}
+              className="btn btn-success"
+              style={{ fontSize: "18px" }}
+            >
               Explore Our Recipes
             </Button>
           </Container>

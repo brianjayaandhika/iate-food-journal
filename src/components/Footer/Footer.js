@@ -1,8 +1,19 @@
 import "./Footer.css";
-import { FaCopyright, FaTwitter, FaInstagram, FaGithub, FaFacebook } from "react-icons/fa";
+import { FaCopyright, FaGithub, FaLinkedin } from "react-icons/fa";
 import { Row, Col, Container, InputGroup, Form, Button } from "react-bootstrap";
+import { useState, useEffect } from "react";
 
 const Footer = () => {
+  const [isLogin, setIsLogin] = useState(false);
+
+  const handleIsLogin = () => {
+    localStorage.getItem("id") ? setIsLogin(true) : setIsLogin(false);
+  };
+
+  useEffect(() => {
+    handleIsLogin();
+  }, []);
+
   return (
     <>
       <div className="footer-section pt-4">
@@ -12,17 +23,19 @@ const Footer = () => {
               <p className="footer-item-title m-0">Navigation</p>
               <ul>
                 <li>
-                  <a className="footer-item" href="#">
+                  <a className="footer-item" href="/">
                     Home
                   </a>
                 </li>
+                {isLogin ? (
+                  <li>
+                    <a href="/favorite" className="footer-item">
+                      Favorite
+                    </a>{" "}
+                  </li>
+                ) : null}
                 <li>
-                  <a className="footer-item" href="#">
-                    Favorite
-                  </a>
-                </li>
-                <li>
-                  <a className="footer-item" href="#">
+                  <a className="footer-item" href="/foods">
                     Food List
                   </a>
                 </li>
@@ -32,16 +45,15 @@ const Footer = () => {
               <p className="footer-item-title m-0 pb-2">Follow us at</p>
               <ul className="d-flex gap-3 justify-content-center justify-content-md-start">
                 <li className="footer-item">
-                  <FaTwitter className="footer-icon" />
+                  <a href="https://www.linkedin.com/in/muhammad-brianjaya-andhika/" target="_blank">
+                    <FaLinkedin className="footer-icon" />
+                  </a>
                 </li>
+
                 <li className="footer-item">
-                  <FaInstagram className="footer-icon" />
-                </li>
-                <li className="footer-item">
-                  <FaGithub className="footer-icon" />
-                </li>
-                <li className="footer-item">
-                  <FaFacebook className="footer-icon" />
+                  <a href="https://github.com/brianjayaandhika" target="_blank">
+                    <FaGithub className="footer-icon" />
+                  </a>
                 </li>
               </ul>
             </Col>

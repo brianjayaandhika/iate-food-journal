@@ -9,7 +9,6 @@ import { FaStar, FaHeart } from "react-icons/fa";
 
 const FoodList = () => {
   const [foods, setFoods] = useState([]);
-  const [isLogin, setIsLogin] = useState(false);
 
   // Get All Foods
   const getFoodList = () => {

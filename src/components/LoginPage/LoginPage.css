@@ -1,0 +1,118 @@
+.login-section {
+  background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8)), url("../../images/loginSection-bg.webp");
+
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: darken;
+  height: 100vh;
+}
+
+.login-bubble {
+  width: 460px;
+  padding: 24px;
+  margin-top: 80px !important;
+
+  background-color: rgba(0, 0, 0, 0.5);
+  box-shadow: 8px 5px 20px 0px rgba(3, 172, 14, 0.8), inset 1px 2px 4px 0px rgba(3, 172, 14, 0.8), inset 1px 2px 2px 0px yellow;
+
+  border-radius: 20px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.login-brand {
+  font-family: "Spline Sans";
+  font-weight: 700;
+  font-size: 42px;
+  line-height: 38px;
+  letter-spacing: 2px;
+  text-decoration: none;
+
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+  margin-bottom: 16px !important;
+  margin: auto;
+
+  border-bottom: 2px solid rgba(255, 255, 255, 0.8);
+  color: var(--green-tp);
+}
+
+.login-brand:hover {
+  opacity: 0.8;
+  color: var(--green-tp);
+}
+
+.login-regist-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 12px;
+  margin-bottom: 6px;
+
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--green-tp);
+  background: black;
+
+  border-radius: 8px;
+}
+
+.login-label {
+  font-size: 20px;
+  color: white;
+}
+
+.login-label:last-child {
+  font-size: 16px;
+}
+
+.regist-text {
+  color: white;
+  font-size: 20px !important;
+  display: flex;
+  gap: 4px;
+
+  justify-content: center;
+}
+
+.regist-link {
+  color: var(--green-tp);
+}
+
+/* Media Query */
+
+@media screen and (max-width: 496px) {
+  .login-bubble {
+    width: 90%;
+  }
+
+  .login-brand {
+    font-size: 32px;
+  }
+
+  .login-btn {
+    font-size: 16px;
+  }
+
+  .login-label {
+    font-size: 16px;
+    color: white;
+  }
+
+  .login-label:last-child {
+    font-size: 14px;
+  }
+
+  .regist-text {
+    font-size: 18px !important;
+  }
+}

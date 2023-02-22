@@ -16,7 +16,24 @@
   flex-grow: 0;
 }
 
-.header-link {
+.header-link,
+.header-username {
+  font-family: "Spline Sans", sans-serif !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  font-size: 18px !important;
+  line-height: 22px !important;
+
+  color: white !important;
+  opacity: 0.7;
+}
+
+.header-link:hover,
+.header-username:hover {
+  opacity: 1;
+}
+
+.login-header {
   font-family: "Spline Sans", sans-serif !important;
   font-style: normal !important;
   font-weight: 400 !important;
@@ -26,30 +43,16 @@
   color: white !important;
   opacity: 0.7;
 
-  /* For media query at lg breakpoint */
-
-  /* padding: 10px 24px !important;
-  padding-left: 0 !important;
-  border-bottom: 1px solid rgba(3, 172, 14, 0.4); */
+  text-decoration: none;
 }
 
-.header-link:hover {
-  opacity: 1;
+.login-header:hover {
+  opacity: 1 !important;
 }
 
 .navbar {
   --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 30 30%27%3e%3cpath stroke=%27%2303AC0E%27 stroke-linecap=%27round%27 stroke-miterlimit=%2710%27 stroke-width=%272%27 d=%27M4 7h22M4 15h22M4 23h22%27/%3e%3c/svg%3e") !important;
 }
-
-/* For media query at lg breakpoint */
-
-/* .navbar-toggler:focus {
-  display: none;
-}
-
-.navbar-collapse {
-  background: rgba(0, 0, 0, 0.1);
-} */
 
 @media screen and (max-width: 992px) {
   .navbar-toggler:focus {
