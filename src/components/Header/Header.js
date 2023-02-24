@@ -14,8 +14,9 @@ const Header = () => {
   const handleLogout = () => {
     alert("You have logged out!");
     localStorage.removeItem("name");
-    localStorage.removeItem("email");
     localStorage.removeItem("id");
+    localStorage.removeItem("role");
+    localStorage.removeItem("token");
     setIsLogin(false);
 
     window.location.reload(true);

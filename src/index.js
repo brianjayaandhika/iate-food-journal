@@ -10,6 +10,7 @@ import FoodList from "./components/FoodList/FoodList";
 import LoginPage from "./components/LoginPage/LoginPage";
 import RegisterPage from "./components/RegisterPage/RegisterPage";
 import MyFavorite from "./components/MyFavorite/MyFavorite";
+import Profile from "./components/Profile/Profile";
 
 import reportWebVitals from "./reportWebVitals";
 
@@ -37,6 +38,11 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <RegisterPage />,
+    errorElement: <p>Page Not Found</p>,
+  },
+  {
+    path: "/profile",
+    element: <Profile />,
     errorElement: <p>Page Not Found</p>,
   },
 ]);
