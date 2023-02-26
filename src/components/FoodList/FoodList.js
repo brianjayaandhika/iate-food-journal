@@ -9,6 +9,9 @@ import { FaStar, FaHeart } from "react-icons/fa";
 
 const FoodList = () => {
   const [foods, setFoods] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const jwtToken = localStorage.getItem("token");
 
   // Get All Foods
   const getFoodList = () => {
@@ -16,50 +19,67 @@ const FoodList = () => {
       method: "get",
       url: `${process.env.REACT_APP_BASEURL}/api/v1/foods`,
       headers: {
-        Authorization: `Bearer ${process.env.REACT_APP_JWTTOKEN}`,
+        Authorization: `Bearer ${jwtToken || process.env.REACT_APP_JWTTOKEN}`,
         apiKey: `${process.env.REACT_APP_APIKEY}`,
       },
     })
       .then(function (response) {
         setFoods(response.data.data);
-        console.log(response.data.data);
+        setIsLoading(false);
+        // console.log(response.data.data);
       })
       .catch(function (error) {
         console.log(error);
       });
   };
 
-  // // Like Button
-  // const handleLikeButton = (foodId) => {
-  //   axios({
-  //     method: "post",
-  //     url: `${process.env.REACT_APP_BASEURL}/api/v1/like`,
-  //     headers: {
-  //       apiKey: `${process.env.REACT_APP_APIKEY}`,
-  //       Authorization: `Bearer ${process.env.REACT_APP_JWTTOKEN}`,
-  //     },
-  //     body: {
-  //       foodId: foodId,
-  //     },
-  //   });
-  // };
+  // Like Button
+  const handleLikeButton = (food) => {
+    const foodId = food.id;
+    // console.log(foodId);
+    axios({
+      method: "post",
+      url: `${process.env.REACT_APP_BASEURL}/api/v1/like`,
+      headers: {
+        apiKey: `${process.env.REACT_APP_APIKEY}`,
+        Authorization: `Bearer ${jwtToken}`,
+      },
+      data: {
+        foodId: foodId,
+      },
+    })
+      .then(function () {})
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
-  // // Unlike Button
-  // const handleUnlikeButton = () => {
-  //   axios({
-  //     method: "post",
-  //     url: `${process.env.REACT_APP_BASEURL}/api/v1/unlike`,
-  //     headers: {
-  //       apiKey: `${process.env.REACT_APP_APIKEY}`,
-  //       Authorization: `Bearer ${process.env.REACT_APP_JWTTOKEN}`,
-  //     },
-  //   });
-  // };
+  // Unlike Button
+  const handleUnlikeButton = (food) => {
+    const foodId = food.id;
+    axios({
+      method: "post",
+      url: `${process.env.REACT_APP_BASEURL}/api/v1/unlike`,
+      headers: {
+        apiKey: `${process.env.REACT_APP_APIKEY}`,
+        Authorization: `Bearer ${jwtToken}`,
+      },
+      data: {
+        foodId: foodId,
+      },
+    })
+      .then(function () {})
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
   useEffect(() => {
     getFoodList();
-  }, []);
 
+    if (!isLoading) {
+    }
+  }, [handleLikeButton]);
   return (
     <>
       <div className="foodlist-section">
@@ -69,34 +89,43 @@ const FoodList = () => {
         <div className=" pt-4 pb-5">
           <Container>
             <h1 className="foodlist-title mb-5 pt-3">Our Recipes</h1>
+
             <Row className="foodlist-row g-1">
-              {foods.map((food, i) => {
-                return (
-                  <Col
-                    key={i}
-                    xs={12}
-                    sm={6}
-                    md={6}
-                    lg={4}
-                    xl={4}
-                    xxl={3}
-                    className="d-flex flex-column align-items-center
+              {!isLoading
+                ? foods.map((food, i) => {
+                    return (
+                      <Col
+                        key={i}
+                        xs={12}
+                        sm={6}
+                        md={6}
+                        lg={4}
+                        xl={4}
+                        xxl={3}
+                        className="d-flex flex-column align-items-center
                  mb-md-4 mb-4 foodlist-col"
-                  >
-                    <img src={food.imageUrl} className="foodlist-img " />
-                    <p className="foodlist-text">{food.name}</p>
-                    <div className="foodlist-rates mb-3">
-                      <span className="foodlist-rates-text">
-                        <FaStar style={{ color: "gold" }} /> {food.rating}
-                      </span>
-                      <span className="foodlist-rates-text">
-                        <FaHeart className="foodlist-heart-icon" style={{ color: "red" }} />
-                        {food.totalLikes}
-                      </span>
-                    </div>
-                  </Col>
-                );
-              })}
+                      >
+                        <img src={food.imageUrl} className="foodlist-img " />
+                        <p className="foodlist-text">{food.name}</p>
+                        <div className="foodlist-rates mb-3">
+                          <span className="foodlist-rates-text">
+                            <FaStar style={{ color: "gold" }} /> {food.rating}
+                          </span>
+                          <span className="foodlist-rates-text">
+                            <FaHeart
+                              className="foodlist-heart-icon"
+                              style={!food.isLike ? { color: "grey" } : { color: "red" }}
+                              onClick={() => {
+                                food.isLike ? handleUnlikeButton(food) : handleLikeButton(food);
+                              }}
+                            />
+                            {food.totalLikes}
+                          </span>
+                        </div>
+                      </Col>
+                    );
+                  })
+                : null}
             </Row>
           </Container>
         </div>

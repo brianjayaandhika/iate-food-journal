@@ -11,6 +11,7 @@ import LoginPage from "./components/LoginPage/LoginPage";
 import RegisterPage from "./components/RegisterPage/RegisterPage";
 import MyFavorite from "./components/MyFavorite/MyFavorite";
 import Profile from "./components/Profile/Profile";
+import AllUser from "./components/AllUser/AllUser";
 
 import reportWebVitals from "./reportWebVitals";
 
@@ -43,6 +44,11 @@ const router = createBrowserRouter([
   {
     path: "/profile",
     element: <Profile />,
+    errorElement: <p>Page Not Found</p>,
+  },
+  {
+    path: "/all-user",
+    element: <AllUser />,
     errorElement: <p>Page Not Found</p>,
   },
 ]);

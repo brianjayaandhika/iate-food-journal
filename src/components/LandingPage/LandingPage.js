@@ -23,7 +23,7 @@ const LandingPage = () => {
     })
       .then(function (response) {
         setFoods(response.data.data);
-        console.log(response.data.data);
+        // console.log(response.data.data);
         setIsLoading(false);
       })
       .catch(function (error) {
@@ -68,8 +68,8 @@ const LandingPage = () => {
         </div>
       </div>
       {/* End of Intro Section */}
-      {/* Favorite Section */}
 
+      {/* Favorite Section */}
       <div className="favorite-section pt-4 pb-5">
         <Container>
           <h1 className="favorite-title mb-5 pt-3">Most Liked Foods</h1>
@@ -92,8 +92,8 @@ const LandingPage = () => {
           </Row>
         </Container>
       </div>
-
       {/* End of Favorite Section */}
+
       {/* Feature Section */}
       <div className="feature-section pt-5 pb-5">
         <Container>
@@ -129,6 +129,7 @@ const LandingPage = () => {
         </Container>
       </div>
       {/* End of Feature Section */}
+
       {/* Footer Section */}
       <Footer />
       {/* End of Footer Section */}

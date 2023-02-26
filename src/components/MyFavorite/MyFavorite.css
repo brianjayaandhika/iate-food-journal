@@ -1,0 +1,32 @@
+/* Favorite Section Styles */
+.favorite-section {
+  background: rgba(0, 0, 0, 1);
+  border-top: 2px solid rgba(3, 172, 14, 0.1);
+}
+
+.favorite-text {
+  font-size: 29px;
+  color: white;
+  text-decoration: none;
+
+  opacity: 1;
+
+  padding-left: 12px;
+
+  text-align: center;
+}
+
+/* End of Favorite Section Styles */
+
+@media screen and (min-width: 576px) and (max-width: 767px) {
+  .foodlist-img {
+    width: 250px;
+    height: 200px;
+  }
+}
+/* 
+@media screen and (max-width: 483px) {
+  .favorite-text {
+    font-size: 24px;
+  }
+} */

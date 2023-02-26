@@ -1,7 +1,7 @@
 /* Intro Section Styles */
 .intro-section {
   height: 100vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.9)), url("../../images/landingPage-bg.jpg");
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.9)), url("../../images/landingPage-bg.webp");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -95,7 +95,7 @@
 
 /* Feature Section Styles */
 .feature-section {
-  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.9)), url("../../images/featureSection-bg.jpg");
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.9)), url("../../images/featureSection-bg.webp");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;

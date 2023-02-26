@@ -8,6 +8,8 @@ import axios from "axios";
 import { Button } from "react-bootstrap";
 import { FaPhone, FaUserEdit, FaMailBulk } from "react-icons/fa";
 
+import profile from "../../images/profile.jpg";
+
 const Profile = () => {
   const [allUser, setAllUser] = useState([]);
   const [specificUser, setSpecificUser] = useState([]);
@@ -59,7 +61,15 @@ const Profile = () => {
               <p className="profile-id text-capitalize">#{specificUser.id}</p>
             </div>
             <div class="profile-card-bottom-section">
-              <img className="profile-img p-1 mb-3" src={specificUser.profilePictureUrl || "https://source.unsplash.com/random/?Man/"} alt="profilePicture" />
+              <img
+                className="profile-img p-1 mb-3"
+                src={specificUser.profilePictureUrl || profile}
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = profile;
+                }}
+                alt="profilePicture"
+              />
               <p className="profile-name">{specificUser.name}</p>
               <p className="profile-desc">
                 <FaMailBulk className="profile-icons me-2" />

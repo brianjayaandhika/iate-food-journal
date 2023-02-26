@@ -5,9 +5,15 @@ import axios from "axios";
 
 const Header = () => {
   const [isLogin, setIsLogin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const jwtToken = localStorage.getItem("token");
 
   const handleIsLogin = () => {
     localStorage.getItem("id") ? setIsLogin(true) : setIsLogin(false);
+  };
+
+  const handleIsAdmin = () => {
+    localStorage.getItem("role") == "admin" ? setIsAdmin(true) : setIsAdmin(false);
   };
 
   // Logout
@@ -19,23 +25,24 @@ const Header = () => {
     localStorage.removeItem("token");
     setIsLogin(false);
 
-    window.location.reload(true);
+    window.location.assign("/");
   };
 
   useEffect(() => {
     handleIsLogin();
+    handleIsAdmin();
 
     if (isLogin) {
       axios({
         method: "get",
         url: `${process.env.REACT_APP_BASEURL}/api/v1/user`,
         headers: {
-          Authorization: `Bearer ${process.env.REACT_APP_JWTTOKEN}`,
+          Authorization: `Bearer ${jwtToken}`,
           apiKey: `${process.env.REACT_APP_APIKEY}`,
         },
       })
         .then(function (response) {
-          console.log(response.data);
+          // console.log(response.data);
         })
         .catch(function (error) {
           console.log(error);
@@ -68,11 +75,12 @@ const Header = () => {
             {isLogin ? (
               <NavDropdown className="header-username" title={localStorage.getItem("name")} id="nav-dropdown">
                 <NavDropdown.Item href="/profile">Edit Profile</NavDropdown.Item>
+                {isAdmin ? <NavDropdown.Item href="/all-user">All User (Admin)</NavDropdown.Item> : null}
                 <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
               </NavDropdown>
             ) : (
               <a href="/login" className="login-header">
-                Login
+                Sign In
               </a>
             )}
           </Navbar.Collapse>
