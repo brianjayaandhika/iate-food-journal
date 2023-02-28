@@ -1,0 +1,138 @@
+.detail-section {
+  background: black;
+  height: 100%;
+  padding-bottom: 200px;
+}
+
+.detail-food-name {
+  color: white;
+
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  align-items: center;
+}
+
+.detail-food-area {
+  display: flex;
+  gap: 12px;
+}
+
+.detail-food-left {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.detail-food-img {
+  width: 500px;
+
+  aspect-ratio: 1.11 / 1;
+
+  border-radius: 16px;
+
+  box-shadow: 0px 0px 15px 5px rgba(255, 255, 190, 0.65);
+}
+
+.detail-food-right {
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  justify-content: space-between;
+}
+
+.detail-food-desc {
+  color: white;
+  font-size: 24px;
+}
+
+.detail-food-stats {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 16px;
+}
+
+.detail-icons-group {
+  display: flex;
+  gap: 24px;
+}
+
+.desc-ingredients {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.detail-ingredients-icon {
+  color: var(--green-tp);
+}
+
+.detail-icons {
+  width: 42px;
+  height: 42px;
+}
+
+.detail-icons-text {
+  color: white;
+  font-size: 32px;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.detail-heart-icon {
+  cursor: pointer;
+}
+
+.detail-heart-icon:active {
+  scale: 1.2;
+}
+
+.detail-back-to-foods {
+  color: var(--green-tp);
+
+  display: flex;
+}
+
+.detail-back-to-foods:hover {
+  opacity: 0.6;
+  color: var(--green-tp);
+}
+
+.detail-btn-group {
+  display: flex;
+  gap: 16px;
+}
+
+.detail-btn {
+  padding: 12px 24px;
+  width: fit-content;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.detail-label {
+  font-size: 18px;
+}
+
+@media screen and (max-width: 768px) {
+  .detail-container {
+    width: 90% !important;
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .detail-food-img {
+    width: 95%;
+
+    border-radius: 16px;
+
+    box-shadow: 0px 0px 15px 5px rgba(255, 255, 190, 0.65);
+  }
+}

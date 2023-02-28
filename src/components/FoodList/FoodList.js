@@ -10,6 +10,7 @@ import { FaStar, FaHeart } from "react-icons/fa";
 const FoodList = () => {
   const [foods, setFoods] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [toggleLike, setToggleLike] = useState(false);
 
   const jwtToken = localStorage.getItem("token");
 
@@ -36,7 +37,6 @@ const FoodList = () => {
   // Like Button
   const handleLikeButton = (food) => {
     const foodId = food.id;
-    // console.log(foodId);
     axios({
       method: "post",
       url: `${process.env.REACT_APP_BASEURL}/api/v1/like`,
@@ -48,9 +48,11 @@ const FoodList = () => {
         foodId: foodId,
       },
     })
-      .then(function () {})
+      .then(function (response) {
+        setToggleLike((prevState) => !prevState);
+      })
       .catch(function (error) {
-        console.log(error);
+        alert("You have to login to use this feature!");
       });
   };
 
@@ -68,21 +70,25 @@ const FoodList = () => {
         foodId: foodId,
       },
     })
-      .then(function () {})
+      .then(function (response) {
+        setToggleLike((prevState) => !prevState);
+      })
       .catch(function (error) {
-        console.log(error);
+        alert("You have to login to use this feature!");
       });
+  };
+
+  // onClick for food details
+  const onClickDetails = (food) => {
+    window.location.assign(`/detail?foodId=${food.id}`);
   };
 
   useEffect(() => {
     getFoodList();
-
-    if (!isLoading) {
-    }
-  }, [handleLikeButton]);
+  }, [toggleLike]);
   return (
     <>
-      <div className="foodlist-section">
+      <div className="foodlist-section" style={!foods.length > 0 ? { height: "100vh" } : { height: "100%" }}>
         <Header />
 
         {/* Taken from LandingPage - Favorite Section */}
@@ -105,7 +111,7 @@ const FoodList = () => {
                         className="d-flex flex-column align-items-center
                  mb-md-4 mb-4 foodlist-col"
                       >
-                        <img src={food.imageUrl} className="foodlist-img " />
+                        <img src={food.imageUrl} onClick={() => onClickDetails(food)} className="foodlist-img " />
                         <p className="foodlist-text">{food.name}</p>
                         <div className="foodlist-rates mb-3">
                           <span className="foodlist-rates-text">

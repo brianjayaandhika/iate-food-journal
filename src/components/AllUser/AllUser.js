@@ -40,7 +40,7 @@ const AllUser = () => {
 
   return (
     <>
-      <div className="alluser-section">
+      <div className="alluser-section" style={!allUser.length > 0 ? { height: "100vh" } : { height: "100%" }}>
         <Header />
 
         {/* Taken from LandingPage - Favorite Section */}
@@ -49,41 +49,43 @@ const AllUser = () => {
           <div className="card-section">
             <Container>
               <Row xs={1} sm={2} md={3} lg={3} xl={3} xxl={4} className="card-group g-xl-4 gy-lg-4 gx-sm-1 gy-sm-4 gy-md-2 gx-md-5 g-4  ">
-                {allUser.map((user, i) => {
-                  return (
-                    <Col key={i}>
-                      <div className="alluser-card">
-                        <div className="alluser-card-top-section">
-                          <p className="alluser-id text-capitalize">#{user.id}</p>
-                        </div>
-                        <div className="alluser-card-bottom-section">
-                          <img
-                            className="alluser-img p-1 mb-3"
-                            src={user.profilePictureUrl || profile}
-                            onError={(e) => {
-                              e.target.onerror = null;
-                              e.target.src = profile;
-                            }}
-                            alt="profilePicture"
-                          />
-                          <p className="alluser-name">{user.name}</p>
-                          <p className="alluser-desc">
-                            <FaMailBulk className="alluser-icons me-2" />
-                            {user.email}
-                          </p>
-                          <p className="alluser-desc">
-                            <FaPhone className="alluser-icons me-2" />
-                            {user.phoneNumber}
-                          </p>
-                          <p className="alluser-desc text-capitalize">
-                            <FaUserEdit className="alluser-icons me-2" />
-                            {user.role} account
-                          </p>
-                        </div>
-                      </div>
-                    </Col>
-                  );
-                })}
+                {!isLoading
+                  ? allUser.map((user, i) => {
+                      return (
+                        <Col key={i}>
+                          <div className="alluser-card">
+                            <div className="alluser-card-top-section">
+                              <p className="alluser-id text-capitalize">#{user.id}</p>
+                            </div>
+                            <div className="alluser-card-bottom-section">
+                              <img
+                                className="alluser-img p-1 mb-3"
+                                src={user.profilePictureUrl || profile}
+                                onError={(e) => {
+                                  e.target.onerror = null;
+                                  e.target.src = profile;
+                                }}
+                                alt="profilePicture"
+                              />
+                              <p className="alluser-name">{user.name}</p>
+                              <p className="alluser-desc">
+                                <FaMailBulk className="alluser-icons me-2" />
+                                {user.email}
+                              </p>
+                              <p className="alluser-desc">
+                                <FaPhone className="alluser-icons me-2" />
+                                {user.phoneNumber}
+                              </p>
+                              <p className="alluser-desc text-capitalize">
+                                <FaUserEdit className="alluser-icons me-2" />
+                                {user.role} account
+                              </p>
+                            </div>
+                          </div>
+                        </Col>
+                      );
+                    })
+                  : null}
               </Row>
             </Container>
           </div>

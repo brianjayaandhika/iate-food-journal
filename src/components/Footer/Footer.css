@@ -1,7 +1,7 @@
 .footer-section {
   background: rgba(0, 0, 0, 1);
-  border-top: 2px solid rgba(3, 172, 14, 0.1);
-  border-bottom: 2px solid rgba(3, 172, 14, 0.1);
+  border-top: 3px solid rgba(3, 172, 14, 0.2);
+  border-bottom: 3px solid rgba(3, 172, 14, 0.2);
 }
 
 .footer-section ul {

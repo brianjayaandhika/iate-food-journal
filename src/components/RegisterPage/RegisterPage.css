@@ -88,6 +88,12 @@
 
 /* Media Query */
 
+@media screen and (max-width: 991px) {
+  .register-bubble {
+    margin-top: 20px !important;
+  }
+}
+
 @media screen and (max-width: 657px) {
   .register-bubble {
     width: 90%;
@@ -112,5 +118,22 @@
 
   .regist-text {
     font-size: 18px !important;
+  }
+}
+
+@media screen and (max-width: 394px) {
+  .regist-text {
+    font-size: 13px !important;
+  }
+
+  .register-label {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-height: 700px) {
+  .register-section {
+    height: 100%;
+    padding-bottom: 24px !important;
   }
 }

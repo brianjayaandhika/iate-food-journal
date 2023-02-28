@@ -62,7 +62,7 @@
   cursor: pointer;
 }
 
-.foodlist-heart-icon:hover {
+.foodlist-heart-icon:active {
   scale: 1.2;
 }
 

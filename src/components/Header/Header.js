@@ -52,7 +52,7 @@ const Header = () => {
 
   return (
     <>
-      <Navbar expand="lg">
+      <Navbar expand="lg" style={{ borderBottom: "2px solid rgba(3, 172, 14, 0.2" }}>
         <Container>
           <Navbar.Brand className="header-brand " href="/">
             iAte

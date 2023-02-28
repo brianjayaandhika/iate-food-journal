@@ -12,6 +12,7 @@ import RegisterPage from "./components/RegisterPage/RegisterPage";
 import MyFavorite from "./components/MyFavorite/MyFavorite";
 import Profile from "./components/Profile/Profile";
 import AllUser from "./components/AllUser/AllUser";
+import FoodDetail from "./components/FoodDetail/FoodDetail";
 
 import reportWebVitals from "./reportWebVitals";
 
@@ -49,6 +50,11 @@ const router = createBrowserRouter([
   {
     path: "/all-user",
     element: <AllUser />,
+    errorElement: <p>Page Not Found</p>,
+  },
+  {
+    path: "/detail",
+    element: <FoodDetail />,
     errorElement: <p>Page Not Found</p>,
   },
 ]);

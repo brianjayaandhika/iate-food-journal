@@ -37,6 +37,11 @@ const LandingPage = () => {
     // state mostFavorite berisi 3 food dengan total likes terbanyak
   };
 
+  // onClick for food details
+  const onClickDetails = (food) => {
+    window.location.assign(`/detail?foodId=${food.id}`);
+  };
+
   useEffect(() => {
     getFoodList();
 
@@ -84,7 +89,7 @@ const LandingPage = () => {
                   className="d-flex flex-column align-items-center 
                  mb-md-4 mb-4 "
                 >
-                  <img src={food.imageUrl} className="favorite-img" />
+                  <img src={food.imageUrl} onClick={() => onClickDetails(food)} className="favorite-img" />
                   <p className="favorite-text mt-3">{food.name}</p>
                 </Col>
               );
