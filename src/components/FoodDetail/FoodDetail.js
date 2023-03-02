@@ -1,13 +1,14 @@
 import "./FoodDetail.css";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
+import profile from "../../images/profile.jpg";
 
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useSearchParams } from "react-router-dom";
-import { FaHeart, FaStar, FaPencilAlt, FaArrowCircleLeft, FaEdit } from "react-icons/fa";
+import { FaHeart, FaStar, FaPencilAlt, FaArrowCircleLeft, FaEdit, FaPlus, FaTimes, FaTrashAlt } from "react-icons/fa";
 import { RiShoppingBasketFill } from "react-icons/ri";
-import { Container, Row, Col, Button, Modal, Form } from "react-bootstrap";
+import { Container, Row, Col, Button, Modal, Form, InputGroup } from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
@@ -15,14 +16,16 @@ const FoodDetail = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [food, setFood] = useState([]);
-  const foodId = searchParams.get("foodId");
-  const jwtToken = localStorage.getItem("token");
+  const [review, setReview] = useState([]);
+  const [foodIngredient, setFoodIngredient] = useState([]);
 
   const [toggleLike, setToggleLike] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isLogin, setIsLogin] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
 
+  const foodId = searchParams.get("foodId");
+  const jwtToken = localStorage.getItem("token");
   const formErrorStyle = { color: "red", fontSize: "14px", padding: "0", margin: "0" };
 
   // States for Modal
@@ -38,8 +41,18 @@ const FoodDetail = () => {
   const handleCloseReviewModal = () => setShowReviewModal(false);
   const handleShowReviewModal = () => setShowReviewModal(true);
 
-  // Get food by ID
-  function getFoodDetail() {
+  // handle isLogin
+  const handleLogin = () => {
+    localStorage.getItem("name") ? setIsLogin(true) : setIsLogin(false);
+  };
+
+  // handle isAdmin
+  const handleRole = () => {
+    localStorage.getItem("role") == "admin" ? setIsAdmin(true) : setIsAdmin(false);
+  };
+
+  // Get food and food review by ID
+  const getFoodDetail = () => {
     axios({
       method: "get",
       url: `${process.env.REACT_APP_BASEURL}/api/v1/foods/${foodId}`,
@@ -50,22 +63,26 @@ const FoodDetail = () => {
     })
       .then((response) => {
         setFood(response.data.data);
-        setIsLoading(false);
-        // console.log(food);
+        setFoodIngredient(response.data.data.ingredients);
+
+        axios({
+          method: "get",
+          url: `${process.env.REACT_APP_BASEURL}/api/v1/food-rating/${foodId}`,
+          headers: {
+            apiKey: `${process.env.REACT_APP_APIKEY}`,
+          },
+        })
+          .then((response) => {
+            setReview(response.data.data);
+            setIsLoading(false);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
       .catch((error) => {
         console.log(error);
       });
-  }
-
-  // handle isLogin
-  const handleLogin = () => {
-    localStorage.getItem("name") ? setIsLogin(true) : setIsLogin(false);
-  };
-
-  // handle isAdmin
-  const handleRole = () => {
-    localStorage.getItem("role") == "admin" ? setIsAdmin(true) : setIsAdmin(false);
   };
 
   // Like Button
@@ -82,10 +99,10 @@ const FoodDetail = () => {
         foodId: foodId,
       },
     })
-      .then(function (response) {
+      .then(() => {
         setToggleLike((prevState) => !prevState);
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
       });
   };
@@ -104,22 +121,61 @@ const FoodDetail = () => {
         foodId: foodId,
       },
     })
-      .then(function (response) {
+      .then(() => {
         setToggleLike((prevState) => !prevState);
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
       });
   };
 
-  useEffect(() => {
-    getFoodDetail();
-    handleLogin();
-    handleRole();
-  }, [toggleLike]);
+  // States for Food Review (stars)
+  const stars = Array(5).fill(0);
 
-  // Formik Update Data
-  const formik = useFormik({
+  const [rating, setRating] = useState("");
+  const [hover, setHover] = useState(null);
+
+  // Formik Add Review
+  const addReview = useFormik({
+    initialValues: {
+      rating: "",
+      review: "",
+    },
+    validationSchema: Yup.object({
+      rating: Yup.number(),
+      review: Yup.string().required(),
+    }),
+    onSubmit: (values) => {
+      axios({
+        method: "post",
+        url: `${process.env.REACT_APP_BASEURL}/api/v1/rate-food/${foodId}`,
+        headers: {
+          apiKey: `${process.env.REACT_APP_APIKEY}`,
+          Authorization: `Bearer ${jwtToken}`,
+        },
+        data: {
+          rating: rating,
+          review: values.review,
+        },
+      })
+        .then(() => {
+          alert("Review has been submitted");
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  });
+
+  // Add Review Submission
+  const handleReviewSubmit = (e) => {
+    e.preventDefault();
+    addReview.submitForm();
+  };
+
+  // Formik Update Food
+  const updateFood = useFormik({
     initialValues: {
       name: food.name,
       description: food.description,
@@ -146,12 +202,43 @@ const FoodDetail = () => {
           ingredients: values.ingredients,
         },
       })
-        .then(function (response) {})
-        .catch(function (error) {
+        .then()
+        .catch((error) => {
           console.log(error);
         });
     },
   });
+
+  // // Add and Delete ingredients function
+  // const addIngredients = () => {};
+
+  // Delete Food
+  const handleDeleteFood = () => {
+    if (window.confirm("Are you sure you want to delete this food? This change cannot be undone!")) {
+      axios({
+        method: "delete",
+        url: `${process.env.REACT_APP_BASEURL}/api/v1/delete-food/${foodId}`,
+        headers: {
+          apiKey: `${process.env.REACT_APP_APIKEY}`,
+          Authorization: `Bearer ${jwtToken}`,
+        },
+      })
+        .then(() => {
+          alert(`${food.name.toUpperCase()} has been deleted.`);
+          window.location.assign("/foods");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
+  useEffect(() => {
+    getFoodDetail();
+
+    handleLogin();
+    handleRole();
+  }, [toggleLike]);
 
   return (
     <>
@@ -195,84 +282,187 @@ const FoodDetail = () => {
                     <FaStar className="detail-icons " style={{ color: "yellow" }} /> {food.rating}
                   </span>
                 </div>
-                <div className="detail-btn-group">
+
+                <div className="detail-btn-group ">
                   {/* Leave Review Modal */}
 
                   {isLogin ? (
-                    <Button className="btn-success detail-btn mt-5" onClick={handleShowReviewModal}>
-                      <FaPencilAlt /> Leave a Review!
+                    <Button className="btn-success detail-btn mt-5 me-3" onClick={handleShowReviewModal}>
+                      <FaPencilAlt /> Leave a Review
                     </Button>
                   ) : null}
 
                   <Modal show={showReviewModal} onHide={handleCloseReviewModal} backdrop="static" keyboard={false}>
                     <Modal.Header closeButton>
-                      <Modal.Title>Review</Modal.Title>
+                      <Modal.Title>Food Review - {food.name}</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>I will not close if you click outside me. Don't even try to press escape key.</Modal.Body>
-                    <Modal.Footer>
-                      <Button variant="secondary" onClick={handleCloseReviewModal}>
-                        Close
-                      </Button>
-                      <Button variant="primary">Understood</Button>
-                    </Modal.Footer>
+
+                    <Modal.Body className="details-review-modalbody">
+                      <Form onSubmit={handleReviewSubmit}>
+                        <img className="details-review-image" src={food.imageUrl} alt={food.name} />
+
+                        {/* Form untuk rating bintang */}
+
+                        <div className="details-review-star">
+                          {stars.map((_, i) => {
+                            const ratingValue = i + 1;
+
+                            return (
+                              <Form.Label key={i}>
+                                <Form.Check
+                                  className="detail-review-type"
+                                  type="radio"
+                                  name="rating"
+                                  style={{ display: "none" }}
+                                  value={ratingValue}
+                                  onClick={() => {
+                                    setRating(ratingValue);
+                                  }}
+                                ></Form.Check>
+                                <FaStar
+                                  className="detail-review-star-icon mt-4"
+                                  color={ratingValue <= (hover || rating) ? "#ffff00" : "#333"}
+                                  size={48}
+                                  onMouseEnter={() => {
+                                    setHover(ratingValue);
+                                  }}
+                                  onMouseLeave={() => {
+                                    setHover(null);
+                                  }}
+                                />
+                              </Form.Label>
+                            );
+                          })}
+                        </div>
+
+                        <Form.Group className="mb-1" controlId="review">
+                          <Form.Label className="detail-review-label">Review</Form.Label>
+                          <Form.Control className="detail-review-control" as="textarea" placeholder="Tell us what you think about the food!" onBlur={addReview.handleBlur} onChange={addReview.handleChange} value={addReview.values.review} />
+                        </Form.Group>
+                        <Button className="btn-success mt-4" type="submit">
+                          Save Changes
+                        </Button>
+                      </Form>
+                    </Modal.Body>
                   </Modal>
 
                   {/* Edit Food Modal */}
 
                   {isAdmin ? (
-                    <Button className="btn-success detail-btn mt-5" onClick={handleShowEditModal}>
-                      <FaEdit /> Edit Food!
+                    <Button className="btn-success detail-btn mt-5 me-3" onClick={handleShowEditModal}>
+                      <FaEdit /> Edit Food
                     </Button>
                   ) : null}
 
-                  <Modal show={showEditModal} onHide={handleCloseEditModal} backdrop="static" keyboard={false}>
-                    <Modal.Header closeButton>
-                      <Modal.Title>Update Food - {food.name}</Modal.Title>
-                    </Modal.Header>
-                    <Form onSubmit={formik.handleSubmit}>
+                  <Form onSubmit={updateFood.handleSubmit}>
+                    <Modal show={showEditModal} onHide={handleCloseEditModal} backdrop="static" keyboard={false}>
+                      <Modal.Header closeButton>
+                        <Modal.Title>Update Food - {food.name}</Modal.Title>
+                      </Modal.Header>
                       <Modal.Body>
                         {/* name */}
                         <Form.Group className="mb-1" controlId="name">
                           <Form.Label className="detail-label">Food Name</Form.Label>
-                          <Form.Control type="text" placeholder={food.name} onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.name} />
-                          <Form.Text style={formErrorStyle}>{formik.touched.name && formik.errors.name}</Form.Text>
+                          <Form.Control type="text" placeholder={food.name} onBlur={updateFood.handleBlur} onChange={updateFood.handleChange} value={updateFood.values.name} />
+                          <Form.Text style={formErrorStyle}>{updateFood.touched.name && updateFood.errors.name}</Form.Text>
                         </Form.Group>
 
                         {/* description */}
                         <Form.Group className="mb-1" controlId="description">
                           <Form.Label className="detail-label">Food Description</Form.Label>
-                          <Form.Control type="text" placeholder={food.description} onBlur={formik.handleBlur} onChange={formik.handleChange} value={food.description} />
-                          <Form.Text style={formErrorStyle}>{formik.touched.description && formik.errors.description}</Form.Text>
+                          <Form.Control type="text" placeholder={food.description} onBlur={updateFood.handleBlur} onChange={updateFood.handleChange} value={food.description} />
+                          <Form.Text style={formErrorStyle}>{updateFood.touched.description && updateFood.errors.description}</Form.Text>
                         </Form.Group>
 
                         {/* ImageUrl */}
-                        <Form.Group controlId="imageUrl" className="mb-3">
+                        <Form.Group controlId="imageUrl" className="mb-1">
                           <Form.Label className="detail-label">Upload Food Image (JPG, JPEG, PNG)</Form.Label>
-                          <Form.Control type="file" onChange={formik.handleChange} value={formik.values.imageUrl} />
+                          <Form.Control type="file" onChange={updateFood.handleChange} value={updateFood.values.imageUrl} />
                         </Form.Group>
 
                         {/* Ingredients */}
                         <Form.Group controlId="ingredients" className="mb-3">
                           <Form.Label className="detail-label">Food Ingredients</Form.Label>
-                          <ul></ul>
-                          <Form.Control type="text" onChange={formik.handleChange} value={formik.values.ingredients} />
+                          {foodIngredient.map((e, i) => {
+                            return (
+                              <InputGroup className="mb-3" key={i}>
+                                <Form.Control readOnly type="text" onChange={updateFood.handleChange} value={e} className="mb-3" />
+
+                                {/* times button */}
+                                <Button className="detail-ingredients-button btn-danger icon-times ">
+                                  <FaTimes className="detail-ingredients-icon " />
+                                </Button>
+                              </InputGroup>
+                            );
+                          })}
+
+                          {/* Add new ingredients */}
+                          <InputGroup className="mb-3">
+                            <Form.Control type="text" onChange={updateFood.handleChange} value="test" className="mb-3" />
+
+                            {/* plus button */}
+                            <Button className="detail-ingredients-button btn-success icon-plus">
+                              <FaPlus className="detail-ingredients-icon " />
+                            </Button>
+
+                            {/* times button */}
+                            <Button className="detail-ingredients-button btn-danger icon-times ">
+                              <FaTimes className="detail-ingredients-icon" />
+                            </Button>
+                          </InputGroup>
                         </Form.Group>
-                      </Modal.Body>
-                      <Modal.Footer>
-                        <Button variant="secondary" onClick={handleCloseEditModal}>
-                          Close
-                        </Button>
-                        <Button className="btn-success" type="submit">
+
+                        <Button className="btn-success mt-4" type="submit">
                           Save Changes
                         </Button>
-                      </Modal.Footer>
-                    </Form>
-                  </Modal>
+                      </Modal.Body>
+                    </Modal>
+                  </Form>
+
+                  {/* Delete Food */}
+
+                  {isAdmin ? (
+                    <Button className="btn-danger detail-btn mt-5" onClick={() => handleDeleteFood()}>
+                      <FaTrashAlt /> Delete Food
+                    </Button>
+                  ) : null}
                 </div>
               </Col>
             </Row>
           </Container>
         </div>
+      </div>
+
+      <div className="detail-review-section">
+        <h1 className="review-title mb-3 pb-2">Food Review</h1>
+        {review.length > 0 ? (
+          review.map((e, i) => {
+            return (
+              <div className="review-bubble mb-4" key={i}>
+                <img
+                  className="review-img"
+                  src={e.user.profilePictureUrl || profile}
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = profile;
+                  }}
+                  alt="profile"
+                />
+                <div className="review-text-group">
+                  <p className="review-name">{e.user.name}</p>
+                  <p className="review-comment">{e.review || "Comment Unavailable"}</p>
+                </div>
+                <p className="review-icon-text">
+                  <FaStar className="review-icon" style={{ color: "yellow" }} /> {e.rating}
+                </p>
+              </div>
+            );
+          })
+        ) : (
+          <p style={{ color: "white", opacity: "0.8" }} className="mt-3">
+            No review has been made on this food
+          </p>
+        )}
       </div>
 
       <Footer />

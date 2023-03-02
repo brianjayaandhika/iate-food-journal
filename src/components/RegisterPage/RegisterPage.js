@@ -13,11 +13,6 @@ const RegisterPage = () => {
 
   const formErrorStyle = { color: "red", fontSize: "14px", padding: "0", margin: "0" };
 
-  // Handle Show Password
-  const handleShowPassword = () => {
-    setPasswordShown(!passwordShown);
-  };
-
   // Formik Login
   const formik = useFormik({
     initialValues: {
@@ -57,11 +52,11 @@ const RegisterPage = () => {
           phoneNumber: values.phoneNumber,
         },
       })
-        .then(function (response) {
+        .then(() => {
           alert("You have registered!");
           window.location.assign("/login");
         })
-        .catch(function (error) {
+        .catch(() => {
           alert("Something wrong happened!");
         });
     },

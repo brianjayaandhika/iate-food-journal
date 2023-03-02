@@ -18,7 +18,7 @@
 .alluser-card {
   width: 300px;
 
-  border: 1px solid var(--green-tp);
+  border: 1px solid rgba(3, 172, 14, 0.4);
   border-radius: 20px;
 
   margin: auto;
@@ -27,12 +27,12 @@
 }
 
 .alluser-card-top-section {
-  border-bottom: 1px solid var(--green-tp);
+  border-bottom: 1px solid rgba(3, 172, 14, 0.4);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: var(--green-tp);
+  background-color: rgba(3, 172, 14, 0.8);
 
   border-top-right-radius: 18px;
   border-top-left-radius: 18px;
@@ -49,7 +49,7 @@
   padding: 12px;
   background-color: rgba(0, 0, 0, 0.6);
 
-  border-bottom: 1px solid var(--green-tp);
+  border-bottom: 1px solid rgba(3, 172, 14, 0.4);
 
   border-bottom-right-radius: 20px;
   border-bottom-left-radius: 20px;
@@ -64,7 +64,7 @@
 
   aspect-ratio: 1 / 1;
 
-  border-radius: 16px;
+  border-radius: 50%;
 
   box-shadow: 0 0.5rem 1rem rgba(255, 255, 255, 0.3);
   margin: auto;
@@ -72,12 +72,12 @@
 }
 
 .alluser-name {
-  color: var(--green-tp);
+  color: rgba(3, 172, 14, 0.8);
   font-size: 24px;
 }
 
 .alluser-desc {
-  color: var(--green-tp);
+  color: rgba(3, 172, 14, 0.8);
   font-size: 16px;
   align-self: flex-start;
 }

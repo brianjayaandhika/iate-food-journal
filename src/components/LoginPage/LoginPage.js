@@ -40,15 +40,15 @@ const LoginPage = () => {
           password: values.password,
         },
       })
-        .then(function (response) {
+        .then((response) => {
           localStorage.setItem("name", response.data.user.name);
           localStorage.setItem("id", response.data.user.id);
           localStorage.setItem("role", response.data.user.role);
           localStorage.setItem("token", response.data.token);
-          alert("You have now signed in!");
+          alert("You have signed in!");
           window.location.assign("/");
         })
-        .catch(function (error) {
+        .catch(() => {
           alert("Invalid Email or Password");
         });
     },

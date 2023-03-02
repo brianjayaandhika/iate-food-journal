@@ -25,12 +25,12 @@ const Profile = () => {
         apiKey: `${process.env.REACT_APP_APIKEY}`,
       },
     })
-      .then(function (response) {
+      .then((response) => {
         // console.log(response.data.data);
         setAllUser(response.data.data);
         setIsLoading(false);
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
       });
   };

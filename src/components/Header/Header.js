@@ -41,10 +41,8 @@ const Header = () => {
           apiKey: `${process.env.REACT_APP_APIKEY}`,
         },
       })
-        .then(function (response) {
-          // console.log(response.data);
-        })
-        .catch(function (error) {
+        .then()
+        .catch((error) => {
           console.log(error);
         });
     }

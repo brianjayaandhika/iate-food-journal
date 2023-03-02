@@ -24,12 +24,12 @@ const FoodList = () => {
         apiKey: `${process.env.REACT_APP_APIKEY}`,
       },
     })
-      .then(function (response) {
+      .then((response) => {
         setFoods(response.data.data);
         setIsLoading(false);
         // console.log(response.data.data);
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
       });
   };
@@ -48,10 +48,10 @@ const FoodList = () => {
         foodId: foodId,
       },
     })
-      .then(function (response) {
+      .then(() => {
         setToggleLike((prevState) => !prevState);
       })
-      .catch(function (error) {
+      .catch(() => {
         alert("You have to login to use this feature!");
       });
   };
@@ -70,10 +70,10 @@ const FoodList = () => {
         foodId: foodId,
       },
     })
-      .then(function (response) {
+      .then(() => {
         setToggleLike((prevState) => !prevState);
       })
-      .catch(function (error) {
+      .catch(() => {
         alert("You have to login to use this feature!");
       });
   };

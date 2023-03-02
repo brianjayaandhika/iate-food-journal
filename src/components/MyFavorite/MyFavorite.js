@@ -24,11 +24,11 @@ const MyFavorite = () => {
         apiKey: `${process.env.REACT_APP_APIKEY}`,
       },
     })
-      .then(function (response) {
+      .then((response) => {
         setLikedFoods(response.data.data);
         setIsLoading(false);
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
       });
   };
@@ -47,10 +47,10 @@ const MyFavorite = () => {
         foodId: foodId,
       },
     })
-      .then(function (response) {
+      .then(() => {
         setToggleLike((prevState) => !prevState);
       })
-      .catch(function (error) {
+      .catch(() => {
         alert("You have to login to use this feature!");
       });
   };
@@ -69,10 +69,10 @@ const MyFavorite = () => {
         foodId: foodId,
       },
     })
-      .then(function (response) {
+      .then(() => {
         setToggleLike((prevState) => !prevState);
       })
-      .catch(function (error) {
+      .catch(() => {
         alert("You have to login to use this feature!");
       });
   };

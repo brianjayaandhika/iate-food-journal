@@ -31,7 +31,7 @@ const Footer = () => {
                   <li>
                     <a href="/favorite" className="footer-item">
                       Favorite
-                    </a>{" "}
+                    </a>
                   </li>
                 ) : null}
                 <li>
