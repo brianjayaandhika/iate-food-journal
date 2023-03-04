@@ -85,3 +85,26 @@
   display: flex;
   justify-content: center;
 }
+
+/* For Modal */
+
+.profile-modal {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-modal-img {
+  width: 250px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+
+  margin: auto;
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0.5rem 1rem rgba(255, 255, 255, 0.3);
+}
+
+.profile-modal-btn {
+  display: flex;
+  margin: auto;
+}

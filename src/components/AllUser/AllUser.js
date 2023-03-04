@@ -5,7 +5,7 @@ import "./AllUser.css";
 
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Button, Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import { FaPhone, FaUserEdit, FaMailBulk } from "react-icons/fa";
 
 import profile from "../../images/profile.jpg";

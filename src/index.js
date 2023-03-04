@@ -13,49 +13,88 @@ import MyFavorite from "./components/MyFavorite/MyFavorite";
 import Profile from "./components/Profile/Profile";
 import AllUser from "./components/AllUser/AllUser";
 import FoodDetail from "./components/FoodDetail/FoodDetail";
+import AddFood from "./components/AddFood/AddFood";
+import PageError from "./components/PageError/PageError";
 
 import reportWebVitals from "./reportWebVitals";
 
+const noAuth = ["/", "/foods", "/login", "/register", "/detail"];
+
+const auth = {
+  noAuth: (Component) => {
+    return <Component />;
+  },
+  login: (Component) => {
+    const isLogin = localStorage.getItem("id") ? true : false;
+
+    if (isLogin || noAuth.includes(window.location.pathname)) {
+      return <Component />;
+    } else {
+      const isLoginPage = window.location.pathname === "/login";
+      if (isLoginPage) {
+        return <LoginPage />;
+      } else {
+        alert("You have to sign in to access this page!");
+        window.location.assign("/login");
+      }
+    }
+  },
+  admin: (Component) => {
+    const isLogin = localStorage.getItem("id") ? true : false;
+    const isAdmin = localStorage.getItem("role") == "admin" ? true : false;
+    if (isLogin && isAdmin) {
+      return <Component />;
+    } else {
+      return <PageError />;
+    }
+  },
+};
+
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <LandingPage />,
-    errorElement: <p>Page Not Found</p>,
+    path: "/", // No Authentication Needed
+    element: auth.noAuth(LandingPage),
+    errorElement: <PageError />,
   },
   {
-    path: "/foods",
-    element: <FoodList />,
-    errorElement: <p>Page Not Found</p>,
+    path: "/foods", // No Authentication Needed
+    element: auth.noAuth(FoodList),
+    errorElement: <PageError />,
   },
   {
-    path: "/favorite",
-    element: <MyFavorite />,
-    errorElement: <p>Page Not Found</p>,
+    path: "/favorite", // Need to Login
+    element: auth.login(MyFavorite),
+    errorElement: <PageError />,
   },
   {
-    path: "/login",
-    element: <LoginPage />,
-    errorElement: <p>Page Not Found</p>,
+    path: "/login", // No Authentication Needed
+    element: auth.noAuth(LoginPage),
+    errorElement: <PageError />,
   },
   {
-    path: "/register",
-    element: <RegisterPage />,
-    errorElement: <p>Page Not Found</p>,
+    path: "/register", // No Authentication Needed
+    element: auth.noAuth(RegisterPage),
+    errorElement: <PageError />,
   },
   {
-    path: "/profile",
-    element: <Profile />,
-    errorElement: <p>Page Not Found</p>,
+    path: "/profile", // Need to Login
+    element: auth.login(Profile),
+    errorElement: <PageError />,
   },
   {
-    path: "/all-user",
-    element: <AllUser />,
-    errorElement: <p>Page Not Found</p>,
+    path: "/all-user", // Need to Login and Have admin role
+    element: auth.admin(AllUser),
+    errorElement: <PageError />,
   },
   {
-    path: "/detail",
-    element: <FoodDetail />,
-    errorElement: <p>Page Not Found</p>,
+    path: "/detail", // No Authentication Needed
+    element: auth.noAuth(FoodDetail),
+    errorElement: <PageError />,
+  },
+  {
+    path: "/add-food", // Need to Login and Have admin role
+    element: auth.admin(AddFood),
+    errorElement: <PageError />,
   },
 ]);
 const root = ReactDOM.createRoot(document.getElementById("root"));

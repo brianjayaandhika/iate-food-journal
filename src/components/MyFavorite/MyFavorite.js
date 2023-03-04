@@ -84,7 +84,6 @@ const MyFavorite = () => {
 
   useEffect(() => {
     getFoodList();
-    console.log(likedFoods);
   }, [toggleLike]);
 
   return (
@@ -109,7 +108,7 @@ const MyFavorite = () => {
                       xl={4}
                       xxl={3}
                       className="d-flex flex-column align-items-center
-                 mb-md-4 mb-4 foodlist-col"
+                     mb-md-4 mb-4 foodlist-col"
                     >
                       <img src={food.imageUrl} onClick={() => onClickDetails(food)} className="foodlist-img " />
                       <p className="foodlist-text">{food.name}</p>

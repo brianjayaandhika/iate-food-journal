@@ -46,7 +46,7 @@ const Header = () => {
           console.log(error);
         });
     }
-  }, []);
+  }, [isLogin, isAdmin]);
 
   return (
     <>
@@ -69,10 +69,15 @@ const Header = () => {
               <Nav.Link href="/foods" className="header-link">
                 Food List
               </Nav.Link>
+              {isAdmin ? (
+                <Nav.Link href="/add-food" className="header-link">
+                  Add Food
+                </Nav.Link>
+              ) : null}
             </Nav>
             {isLogin ? (
               <NavDropdown className="header-username" title={localStorage.getItem("name")} id="nav-dropdown">
-                <NavDropdown.Item href="/profile">Edit Profile</NavDropdown.Item>
+                <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
                 {isAdmin ? <NavDropdown.Item href="/all-user">All User (Admin)</NavDropdown.Item> : null}
                 <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
               </NavDropdown>
