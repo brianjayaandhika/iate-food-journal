@@ -19,7 +19,7 @@ const FoodDetail = () => {
   const [review, setReview] = useState([]);
   const [foodIngredient, setFoodIngredient] = useState([]);
 
-  const [toggleLike, setToggleLike] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isLogin, setIsLogin] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -64,6 +64,11 @@ const FoodDetail = () => {
       .then((response) => {
         setFood(response.data.data);
         setFoodIngredient(response.data.data.ingredients);
+        // console.log(response.data.data.isLike);
+        updateFood.setFieldValue("name", food.name);
+        updateFood.setFieldValue("description", food.description);
+        updateFood.setFieldValue("phoneNumber", food.imageUrl);
+        updateFood.setFieldValue("ingredients", food.ingredients);
 
         axios({
           method: "get",
@@ -77,11 +82,11 @@ const FoodDetail = () => {
             setIsLoading(false);
           })
           .catch((error) => {
-            console.log(error);
+            alert(error);
           });
       })
       .catch((error) => {
-        console.log(error);
+        alert(error);
       });
   };
 
@@ -100,10 +105,11 @@ const FoodDetail = () => {
       },
     })
       .then(() => {
-        setToggleLike((prevState) => !prevState);
+        setIsLiked(food.isLike);
+        // console.log(food.isLike);
       })
       .catch((error) => {
-        console.log(error);
+        alert("You have to login to use this feature!");
       });
   };
 
@@ -122,10 +128,11 @@ const FoodDetail = () => {
       },
     })
       .then(() => {
-        setToggleLike((prevState) => !prevState);
+        setIsLiked(food.isLike);
+        // console.log(food.isLike);
       })
       .catch((error) => {
-        console.log(error);
+        alert("You have to login to use this feature!");
       });
   };
 
@@ -177,10 +184,10 @@ const FoodDetail = () => {
   // Formik Update Food
   const updateFood = useFormik({
     initialValues: {
-      name: food.name,
-      description: food.description,
-      imageUrl: food.imageUrl,
-      ingredients: food.ingredients,
+      name: "",
+      description: "",
+      imageUrl: "",
+      ingredients: "",
     },
     validationSchema: Yup.object({
       name: Yup.string(),
@@ -235,10 +242,11 @@ const FoodDetail = () => {
 
   useEffect(() => {
     getFoodDetail();
+    // console.log(food.isLike);
 
-    handleLogin();
     handleRole();
-  }, [toggleLike]);
+    handleLogin();
+  }, [foodId, isLiked]);
 
   return (
     <>
@@ -270,7 +278,7 @@ const FoodDetail = () => {
                 <div className="detail-icons-group">
                   <span className="detail-icons-text">
                     <FaHeart
-                      className="detail-icons detail-heart-icon"
+                      className="foodlist-heart-icon"
                       style={!food.isLike ? { color: "grey" } : { color: "red" }}
                       onClick={() => {
                         food.isLike ? handleUnlikeButton(food) : handleLikeButton(food);
