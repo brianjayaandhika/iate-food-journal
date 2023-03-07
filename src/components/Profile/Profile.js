@@ -55,11 +55,13 @@ const Profile = () => {
     },
     validationSchema: Yup.object({
       name: Yup.string(),
+
       email: Yup.string().email("Invalid email address"),
       phoneNumber: Yup.string()
         .matches(/^[0-9]*$/, "Must be a number")
         .min(8, "Must be 8 charaters or more")
         .max(12, "Must be 12 characters or less"),
+      profilePictureUrl: Yup.string(),
     }),
     onSubmit: (values) => {
       axios({
@@ -187,8 +189,8 @@ const Profile = () => {
                     </Row>
 
                     <Form.Group controlId="profilePictureUrl" className="mb-5">
-                      <Form.Label className="register-label">Profile Picture (JPG, JPEG, PNG)</Form.Label>
-                      <Form.Control type="file" onChange={formik.handleChange} value={formik.values.profilePictureUrl} />
+                      <Form.Label className="register-label">Profile Picture (Url)</Form.Label>
+                      <Form.Control type="text" onChange={formik.handleChange} value={formik.values.profilePictureUrl} />
                     </Form.Group>
                     <Button className="btn-success profile-modal-btn" type="submit">
                       Save Changes

@@ -88,11 +88,11 @@ const MyFavorite = () => {
 
   return (
     <>
-      <div className="favorite-section">
+      <div className="favorite-section pb-5">
         <Header />
 
         {/* Taken from LandingPage - Favorite Section */}
-        <div className="foodlist-section pt-4 pb-5" style={likedFoods.length > 0 ? { marginBottom: "50px" } : { height: "70vh" }}>
+        <div className="pt-4 pb-5">
           <Container>
             <h1 className="foodlist-title mb-5 pt-3">My Favorites</h1>
             {likedFoods.length > 0 ? (

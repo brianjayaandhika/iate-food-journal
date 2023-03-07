@@ -60,11 +60,7 @@ const LoginPage = () => {
         <Header />
         <div className="login-regist-area">
           <div className="login-bubble m-auto mb-5">
-            <h1>
-              <a href="/" className="login-brand pb-2">
-                iAte
-              </a>
-            </h1>
+            <h1 className="login-title">Sign In</h1>
             <Form onSubmit={formik.handleSubmit}>
               <Form.Group className="mb-1" controlId="email">
                 <Form.Label className="login-label">Email</Form.Label>

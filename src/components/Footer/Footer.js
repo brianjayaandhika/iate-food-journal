@@ -68,7 +68,7 @@ const Footer = () => {
             </Col>
           </Row>
           <h1 className="footer-copyright-text pt-4 ">
-            <FaCopyright /> All Rights Reserved 2023. Made by Muhammad Brianjaya Andhika
+            <FaCopyright /> Made by Muhammad Brianjaya Andhika
           </h1>
         </Container>
       </div>

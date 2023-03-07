@@ -1,5 +1,9 @@
 .detail-section {
-  background: black;
+  background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8)), url("../../images/loginSection-bg.webp");
+
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: darken;
   height: 100%;
   padding-bottom: 48px;
 }
@@ -205,8 +209,6 @@
 /* Review Section */
 
 .detail-review-section {
-  background: black;
-
   display: flex;
   flex-direction: column;
   align-items: center;

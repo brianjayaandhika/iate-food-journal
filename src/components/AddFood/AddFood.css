@@ -1,0 +1,46 @@
+.addFood-section {
+  background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8)), url("../../images/loginSection-bg.webp");
+
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: darken;
+  height: 100vh;
+}
+
+.addFood-bubble {
+  width: 460px;
+  padding: 24px;
+  margin-top: 80px !important;
+
+  background-color: rgba(0, 0, 0, 0.5);
+  box-shadow: 8px 5px 20px 0px rgba(3, 172, 14, 0.8), inset 1px 2px 4px 0px rgba(3, 172, 14, 0.8), inset 1px 2px 2px 0px yellow;
+
+  border-radius: 20px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.addFood-regist-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.addFood-label {
+  font-size: 20px;
+  color: white;
+}
+
+.addFood-group {
+  font-size: 16px !important;
+}
+
+.AddFood-ingredients-icon {
+  color: white;
+}
+
+.addFood-ingredients-btn {
+  border: 1px solid white !important;
+}

@@ -1,5 +1,10 @@
 .profile-section {
-  background: rgba(0, 0, 0, 1);
+  background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8)), url("../../images/loginSection-bg.webp");
+
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: darken;
+  height: 100vh;
   border-top: 2px solid rgba(3, 172, 14, 0.1);
 }
 

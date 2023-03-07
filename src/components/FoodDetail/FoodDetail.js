@@ -27,6 +27,7 @@ const FoodDetail = () => {
   const foodId = searchParams.get("foodId");
   const jwtToken = localStorage.getItem("token");
   const formErrorStyle = { color: "red", fontSize: "14px", padding: "0", margin: "0" };
+  const createdTime = food.createAt;
 
   // States for Modal
   // Edit Modal
@@ -259,7 +260,7 @@ const FoodDetail = () => {
           </a>
           {food.name}
         </h1>
-        <div className="detail-food-area">
+        <div className="detail-food-area pb-5">
           <Container className="detail-container">
             <Row name="description-section">
               <Col md={12} lg={6} className="detail-food-left pb-5 pb-lg-0 ">
@@ -439,38 +440,37 @@ const FoodDetail = () => {
             </Row>
           </Container>
         </div>
-      </div>
-
-      <div className="detail-review-section">
-        <h1 className="review-title mb-3 pb-2">Food Review</h1>
-        {review.length > 0 ? (
-          review.map((e, i) => {
-            return (
-              <div className="review-bubble mb-4" key={i}>
-                <img
-                  className="review-img"
-                  src={e.user.profilePictureUrl || profile}
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = profile;
-                  }}
-                  alt="profile"
-                />
-                <div className="review-text-group">
-                  <p className="review-name">{e.user.name}</p>
-                  <p className="review-comment">{e.review || "Comment Unavailable"}</p>
+        <div className="detail-review-section">
+          <h1 className="review-title mb-3 pb-2">Food Review</h1>
+          {review.length > 0 ? (
+            review.map((e, i) => {
+              return (
+                <div className="review-bubble mb-4" key={i}>
+                  <img
+                    className="review-img"
+                    src={e.user.profilePictureUrl || profile}
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = profile;
+                    }}
+                    alt="profile"
+                  />
+                  <div className="review-text-group">
+                    <p className="review-name">{e.user.name}</p>
+                    <p className="review-comment">{e.review || "Comment Unavailable"}</p>
+                  </div>
+                  <p className="review-icon-text">
+                    <FaStar className="review-icon" style={{ color: "yellow" }} /> {e.rating}
+                  </p>
                 </div>
-                <p className="review-icon-text">
-                  <FaStar className="review-icon" style={{ color: "yellow" }} /> {e.rating}
-                </p>
-              </div>
-            );
-          })
-        ) : (
-          <p style={{ color: "white", opacity: "0.8" }} className="mt-3">
-            No review has been made on this food
-          </p>
-        )}
+              );
+            })
+          ) : (
+            <p style={{ color: "white", opacity: "0.8" }} className="mt-3">
+              No review has been made on this food
+            </p>
+          )}
+        </div>
       </div>
 
       <Footer />

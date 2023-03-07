@@ -21,13 +21,11 @@
   flex-direction: column;
 }
 
-.login-brand {
+.login-title {
   font-family: "Spline Sans";
-  font-weight: 700;
-  font-size: 42px;
+
+  font-size: 32px;
   line-height: 38px;
-  letter-spacing: 2px;
-  text-decoration: none;
 
   display: flex;
   justify-content: center;
@@ -36,7 +34,6 @@
   margin-bottom: 16px !important;
   margin: auto;
 
-  border-bottom: 2px solid rgba(255, 255, 255, 0.8);
   color: var(--green-tp);
 }
 

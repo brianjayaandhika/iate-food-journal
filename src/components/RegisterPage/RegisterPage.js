@@ -68,11 +68,7 @@ const RegisterPage = () => {
         <Header />
         <div className="register-regist-area">
           <div className="register-bubble m-auto">
-            <h1>
-              <a href="/" className="register-brand pb-2">
-                iAte
-              </a>
-            </h1>
+            <h1 className="login-title">Sign Up</h1>
 
             <Form onSubmit={formik.handleSubmit}>
               <Row>
