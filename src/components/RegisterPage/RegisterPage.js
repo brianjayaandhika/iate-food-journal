@@ -61,7 +61,7 @@ const RegisterPage = () => {
 
   return (
     <>
-      <div className="register-section pb-2 pt-2">
+      <div className="register-section">
         <Header />
         <div className="register-regist-area">
           <div className="register-bubble m-auto">
@@ -128,8 +128,8 @@ const RegisterPage = () => {
 
               {/* Profile Picture */}
               <Form.Group controlId="profilePictureUrl" className="mb-3">
-                <Form.Label className="register-label">Profile Picture (JPG, JPEG, PNG)</Form.Label>
-                <Form.Control type="file" onChange={formik.handleChange} value={formik.values.profilePictureUrl} />
+                <Form.Label className="register-label">Profile Picture (Url)</Form.Label>
+                <Form.Control type="text" placeholder="Enter Image Url" onChange={formik.handleChange} value={formik.values.profilePictureUrl} />
               </Form.Group>
 
               <Button disabled={!formik.isValid} type="submit" className="login-btn btn-success">

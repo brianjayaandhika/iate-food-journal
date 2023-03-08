@@ -56,7 +56,7 @@ const LoginPage = () => {
 
   return (
     <>
-      <div className="login-section pb-2 pt-2">
+      <div className="login-section">
         <Header />
         <div className="login-regist-area">
           <div className="login-bubble m-auto mb-5">

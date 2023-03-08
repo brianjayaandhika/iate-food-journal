@@ -86,7 +86,7 @@ const MyFavorite = () => {
 
   return (
     <>
-      <div className="favorite-section pb-5">
+      <div className="favorite-section pb-5" style={likedFoods.length === 0 ? { height: "80vh" } : { height: "100%" }}>
         <Header />
 
         {/* Taken from LandingPage - Favorite Section */}

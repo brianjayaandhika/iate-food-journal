@@ -81,7 +81,7 @@ const AddFood = () => {
 
   return (
     <>
-      <div className="addFood-section pb-2 pt-2">
+      <div className="addFood-section ">
         <Header />
         <div className="addFood-area">
           <div className="addFood-bubble  m-auto mb-5">

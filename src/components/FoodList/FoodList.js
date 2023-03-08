@@ -92,7 +92,7 @@ const FoodList = () => {
         <Header />
 
         {/* Taken from LandingPage - Favorite Section */}
-        <div className=" pt-4 pb-5">
+        <div className="pt-4 pb-5">
           <Container>
             <h1 className="foodlist-title mb-5 pt-3">Our Recipes</h1>
 

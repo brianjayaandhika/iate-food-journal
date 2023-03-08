@@ -198,7 +198,7 @@ const FoodDetail = () => {
         })
           .then(() => {
             alert("Changes have been successfully made!");
-            // window.location.reload();
+            window.location.reload();
           })
           .catch((error) => {
             console.log(error);
