@@ -21,7 +21,7 @@ const FoodDetail = () => {
   const [ingredients, setIngredients] = useState([]);
   const [newIngredient, setNewIngredient] = useState("");
 
-  const [isLiked, setIsLiked] = useState(false);
+  const [isLike, setIsLike] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [isLogin, setIsLogin] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -68,10 +68,9 @@ const FoodDetail = () => {
       },
     })
       .then(() => {
-        setIsLiked(food.isLike);
-        // console.log(food.isLike);
+        setIsLike((prevState) => !prevState);
       })
-      .catch((error) => {
+      .catch(() => {
         alert("You have to login to use this feature!");
       });
   };
@@ -91,10 +90,9 @@ const FoodDetail = () => {
       },
     })
       .then(() => {
-        setIsLiked(food.isLike);
-        // console.log(food.isLike);
+        setIsLike((prevState) => !prevState);
       })
-      .catch((error) => {
+      .catch(() => {
         alert("You have to login to use this feature!");
       });
   };
@@ -214,13 +212,13 @@ const FoodDetail = () => {
       url: `${process.env.REACT_APP_BASEURL}/api/v1/foods/${foodId}`,
       headers: {
         apiKey: `${process.env.REACT_APP_APIKEY}`,
-        Authorization: `Bearer ${process.env.REACT_APP_JWTTOKEN}`,
+        Authorization: `Bearer ${jwtToken}`,
       },
     })
       .then((response) => {
         setFood(response.data.data);
         setIngredients(response.data.data.ingredients);
-        // console.log(response.data.data);
+        setIsLike(response.data.data.isLike);
 
         axios({
           method: "get",
@@ -283,7 +281,7 @@ const FoodDetail = () => {
 
     handleRole();
     handleLogin();
-  }, [getFoodDetail, foodId, isLiked]);
+  }, [getFoodDetail, foodId, isLike]);
 
   return (
     <>
@@ -316,9 +314,9 @@ const FoodDetail = () => {
                   <span className="detail-icons-text">
                     <FaHeart
                       className="foodlist-heart-icon"
-                      style={!food.isLike ? { color: "grey" } : { color: "red" }}
+                      style={!isLike ? { color: "grey" } : { color: "red" }}
                       onClick={() => {
-                        food.isLike ? handleUnlikeButton(food) : handleLikeButton(food);
+                        isLike ? handleUnlikeButton(food) : handleLikeButton(food);
                       }}
                     />
                     {food.totalLikes}
