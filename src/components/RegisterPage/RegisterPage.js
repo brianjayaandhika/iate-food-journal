@@ -2,15 +2,12 @@ import "./RegisterPage.css";
 
 import Header from "../Header/Header";
 
-import { Form, Button, Container, Row, Col } from "react-bootstrap";
-import { useState } from "react";
+import { Form, Button, Row, Col } from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 
 const RegisterPage = () => {
-  const [passwordShown, setPasswordShown] = useState(false);
-
   const formErrorStyle = { color: "red", fontSize: "14px", padding: "0", margin: "0" };
 
   // Formik Login

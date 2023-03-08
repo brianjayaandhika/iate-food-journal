@@ -3,7 +3,7 @@ import "./AddFood.css";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Form, Button, InputGroup } from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -24,7 +24,7 @@ const AddFood = () => {
       setIngredients([...ingredients, newIngredient]);
       setNewIngredient("");
     } else {
-      alert("Someting wong");
+      alert("Something Wrong Happened!");
     }
   };
 
@@ -45,12 +45,13 @@ const AddFood = () => {
       name: "",
       description: "",
       imageUrl: "",
-      ingredients: "",
+      ingredients: [],
     },
     validationSchema: Yup.object({
       name: Yup.string().required("Required"),
       description: Yup.string().required("Required"),
-      imageUrl: Yup.string().required("Required"),
+      imageUrl: Yup.string().url("Invalid URL").required("Required"),
+      ingredients: Yup.array().of(Yup.string()),
     }),
     onSubmit: (values) => {
       axios({
@@ -101,6 +102,7 @@ const AddFood = () => {
               <Form.Group controlId="imageUrl" className="addFood-group mb-2">
                 <Form.Label className="register-label">Image Url</Form.Label>
                 <Form.Control type="text" placeholder="Image Url" onChange={formik.handleChange} value={formik.values.imageUrl} />
+                <Form.Text style={formErrorStyle}>{formik.touched.imageUrl && formik.errors.imageUrl}</Form.Text>
               </Form.Group>
 
               <Form.Group controlId="ingredients" className="addFood-group mb-2">
@@ -118,6 +120,7 @@ const AddFood = () => {
                     <FaPlus className="AddFood-ingredients-icon" />
                   </Button>
                 </InputGroup>
+                <Form.Text style={formErrorStyle}>{formik.touched.ingredients && formik.errors.ingredients}</Form.Text>
 
                 {ingredients.length === 0 ? null : (
                   <ul style={{ listStyleType: "none", paddingLeft: "0" }} className="addFood-ingredients-area">
@@ -142,7 +145,7 @@ const AddFood = () => {
                 )}
               </Form.Group>
 
-              <Button type="submit" disabled={!formik.isValid} className="btn-success m-auto d-flex mt-4">
+              <Button type="submit" disabled={!formik.isValid || ingredients.length === 0} className="btn-success m-auto d-flex mt-4">
                 Submit
               </Button>
             </Form>

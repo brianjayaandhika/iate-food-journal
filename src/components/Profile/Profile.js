@@ -3,8 +3,8 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import "./Profile.css";
 
-import { useState, useEffect } from "react";
-import { Button, Modal, Form, Row, Col } from "react-bootstrap";
+import { useState, useEffect, useCallback } from "react";
+import { Button, Modal, Form } from "react-bootstrap";
 import { FaPhone, FaUserEdit, FaMailBulk } from "react-icons/fa";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -24,25 +24,6 @@ const Profile = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  // Get User Data
-  const getUserData = () => {
-    axios({
-      method: "get",
-      url: `${process.env.REACT_APP_BASEURL}/api/v1/user`,
-      headers: {
-        apiKey: `${process.env.REACT_APP_APIKEY}`,
-        Authorization: `Bearer ${jwtToken}`,
-      },
-    })
-      .then((response) => {
-        setUserData(response.data.user);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
   const formErrorStyle = { color: "red", fontSize: "14px", padding: "0", margin: "0" };
 
   // Formik Edit Profile
@@ -55,13 +36,12 @@ const Profile = () => {
     },
     validationSchema: Yup.object({
       name: Yup.string(),
-
       email: Yup.string().email("Invalid email address"),
+      profilePictureUrl: Yup.string(),
       phoneNumber: Yup.string()
         .matches(/^[0-9]*$/, "Must be a number")
         .min(8, "Must be 8 charaters or more")
         .max(12, "Must be 12 characters or less"),
-      profilePictureUrl: Yup.string(),
     }),
     onSubmit: (values) => {
       axios({
@@ -90,8 +70,26 @@ const Profile = () => {
     },
   });
 
+  // Get User Data
+  const getUserData = useCallback(() => {
+    axios({
+      method: "get",
+      url: `${process.env.REACT_APP_BASEURL}/api/v1/user`,
+      headers: {
+        apiKey: `${process.env.REACT_APP_APIKEY}`,
+        Authorization: `Bearer ${jwtToken}`,
+      },
+    })
+      .then((response) => {
+        setUserData(response.data.user);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [jwtToken]);
+
   useEffect(() => {
-    getUserData();
     if (!isLoading) {
       if (Object.keys(userData).length) {
         formik.setFieldValue("name", userData.name);
@@ -99,7 +97,12 @@ const Profile = () => {
         formik.setFieldValue("phoneNumber", userData.phoneNumber);
       }
     }
-  }, [isLoading]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoading, userData]);
+
+  useEffect(() => {
+    getUserData();
+  }, [getUserData]);
 
   return (
     <>
@@ -143,7 +146,7 @@ const Profile = () => {
                 Edit Profile
               </Button>
 
-              <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
+              <Modal show={show} centered onHide={handleClose} backdrop="static" keyboard={false}>
                 <Modal.Header closeButton>
                   <Modal.Title>Edit Profile</Modal.Title>
                 </Modal.Header>
@@ -157,40 +160,29 @@ const Profile = () => {
                     }}
                     alt="profilePicture"
                   />
+
                   <Form onSubmit={formik.handleSubmit}>
-                    <Row>
-                      <Col>
-                        <Form.Group controlId="name">
-                          <Form.Label className="register-label">Name</Form.Label>
-                          <Form.Control placeholder="Enter Name" onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.name} />
-                          <Form.Text style={formErrorStyle}>{formik.touched.name && formik.errors.name}</Form.Text>
-                        </Form.Group>
-                      </Col>
-                    </Row>
+                    <Form.Group controlId="name">
+                      <Form.Label className="register-label">Name</Form.Label>
+                      <Form.Control placeholder="Enter Name" onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.name} />
+                      <Form.Text style={formErrorStyle}>{formik.touched.name && formik.errors.name}</Form.Text>
+                    </Form.Group>
 
-                    <Row>
-                      <Col>
-                        <Form.Group controlId="email">
-                          <Form.Label className="register-label">Email</Form.Label>
-                          <Form.Control placeholder="Enter Email" onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.email} />
-                          <Form.Text style={formErrorStyle}>{formik.touched.email && formik.errors.email}</Form.Text>
-                        </Form.Group>
-                      </Col>
-                    </Row>
+                    <Form.Group controlId="email">
+                      <Form.Label className="register-label">Email</Form.Label>
+                      <Form.Control placeholder="Enter Email" onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.email} />
+                      <Form.Text style={formErrorStyle}>{formik.touched.email && formik.errors.email}</Form.Text>
+                    </Form.Group>
 
-                    <Row>
-                      <Col>
-                        <Form.Group controlId="phoneNumber">
-                          <Form.Label className="register-label">Phone Number</Form.Label>
-                          <Form.Control placeholder="Enter Phone Number" type="text" onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.phoneNumber} />
-                          <Form.Text style={formErrorStyle}>{formik.touched.phoneNumber && formik.errors.phoneNumber}</Form.Text>
-                        </Form.Group>
-                      </Col>
-                    </Row>
+                    <Form.Group controlId="phoneNumber">
+                      <Form.Label className="register-label">Phone Number</Form.Label>
+                      <Form.Control placeholder="Enter Phone Number" type="text" onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.phoneNumber} />
+                      <Form.Text style={formErrorStyle}>{formik.touched.phoneNumber && formik.errors.phoneNumber}</Form.Text>
+                    </Form.Group>
 
                     <Form.Group controlId="profilePictureUrl" className="mb-5">
                       <Form.Label className="register-label">Profile Picture (Url)</Form.Label>
-                      <Form.Control type="text" onChange={formik.handleChange} value={formik.values.profilePictureUrl} />
+                      <Form.Control type="text" placeholder="Image Url" onChange={formik.handleChange} value={formik.values.profilePictureUrl} />
                     </Form.Group>
                     <Button className="btn-success profile-modal-btn" type="submit">
                       Save Changes

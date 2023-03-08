@@ -2,7 +2,7 @@ import "./FoodList.css";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { Container, Row, Col } from "react-bootstrap";
 import { FaStar, FaHeart } from "react-icons/fa";
@@ -15,7 +15,7 @@ const FoodList = () => {
   const jwtToken = localStorage.getItem("token");
 
   // Get All Foods
-  const getFoodList = () => {
+  const getFoodList = useCallback(() => {
     axios({
       method: "get",
       url: `${process.env.REACT_APP_BASEURL}/api/v1/foods`,
@@ -32,7 +32,7 @@ const FoodList = () => {
       .catch((error) => {
         console.log(error);
       });
-  };
+  }, [jwtToken]);
 
   // Like Button
   const handleLikeButton = (food) => {
@@ -85,7 +85,7 @@ const FoodList = () => {
 
   useEffect(() => {
     getFoodList();
-  }, [toggleLike]);
+  }, [getFoodList, toggleLike]);
   return (
     <>
       <div className="foodlist-section" style={!foods.length > 0 ? { height: "100vh" } : { height: "100%" }}>
@@ -111,7 +111,7 @@ const FoodList = () => {
                         className="d-flex flex-column align-items-center
                  mb-md-4 mb-4 foodlist-col"
                       >
-                        <img src={food.imageUrl} onClick={() => onClickDetails(food)} className="foodlist-img " />
+                        <img src={food.imageUrl} alt={food.name} onClick={() => onClickDetails(food)} className="foodlist-img " />
                         <p className="foodlist-text">{food.name}</p>
                         <div className="foodlist-rates mb-3">
                           <span className="foodlist-rates-text">

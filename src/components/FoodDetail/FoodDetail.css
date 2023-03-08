@@ -1,3 +1,4 @@
+/* Detail Section Styles */
 .detail-section {
   background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8)), url("../../images/loginSection-bg.webp");
 
@@ -125,11 +126,12 @@
   font-size: 18px;
 }
 
-/* Add Food Review */
+/* Modal Styles*/
 
 .modal {
   --bs-modal-header-border-color: rgba(255, 255, 255, 0.35);
   --bs-modal-footer-border-color: rgba(255, 255, 255, 0.35);
+  --bs-modal-width: 550px;
 }
 
 .modal-content {
@@ -143,7 +145,7 @@
     center/1em auto no-repeat;
 }
 
-/* Review - Star Icon */
+/* Modal Review Styles */
 
 .detail-review-star-icon {
   cursor: pointer;
@@ -152,7 +154,6 @@
   transition: 200ms;
 }
 
-/* End of Review - Star Icon */
 .details-review-modalbody {
   display: flex;
   justify-content: center;
@@ -165,17 +166,18 @@
 }
 
 .details-review-image {
-  width: 350px;
+  width: 250px;
   aspect-ratio: 1/1;
   border-radius: 50%;
 }
 
 .modal-title {
   color: white;
+  font-size: 20px;
 }
 
 .detail-review-label {
-  font-size: 24px;
+  font-size: 20px;
   color: white;
 }
 
@@ -184,7 +186,13 @@
   width: 400px;
 }
 
-/* Update Ingredients */
+/* End of - Modal Review Styles */
+
+/* Modal Update Food Styles */
+
+.updateFood-group {
+  font-size: 16px !important;
+}
 
 .detail-ingredients {
   font-size: 16px;
@@ -206,9 +214,12 @@
   color: green;
 }
 
+/* End of - Modal Update Food Styles */
+
 /* Review Section */
 
 .detail-review-section {
+  background: black;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -303,6 +314,20 @@
 @media screen and (max-width: 768px) {
   .detail-container {
     width: 90% !important;
+  }
+}
+
+@media screen and (max-width: 596px) {
+  .modal {
+    --bs-modal-width: 90% !important;
+  }
+
+  .details-review-image {
+    width: 60%;
+  }
+
+  .detail-review-control {
+    width: 80%;
   }
 }
 

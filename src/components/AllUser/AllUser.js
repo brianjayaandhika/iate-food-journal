@@ -25,7 +25,7 @@ const AllUser = () => {
       },
     })
       .then((response) => {
-        console.log(response.data.data);
+        // console.log(response.data.data);
         setAllUser(response.data.data);
         setIsLoading(false);
       })

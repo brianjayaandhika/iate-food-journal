@@ -54,6 +54,15 @@
   --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 30 30%27%3e%3cpath stroke=%27%2303AC0E%27 stroke-linecap=%27round%27 stroke-miterlimit=%2710%27 stroke-width=%272%27 d=%27M4 7h22M4 15h22M4 23h22%27/%3e%3c/svg%3e") !important;
 }
 
+.dropdown-menu[data-bs-popper] {
+  left: -35px;
+  margin-top: 12px;
+}
+
+.dropdown-menu::after {
+  border: 250px solid red;
+}
+
 @media screen and (max-width: 991px) {
   .navbar-toggler:focus {
     display: none;
@@ -67,5 +76,10 @@
     padding: 10px 24px !important;
     padding-left: 0 !important;
     border-bottom: 1px solid rgba(3, 172, 14, 0.4);
+  }
+
+  .dropdown-menu[data-bs-popper] {
+    left: 0;
+    margin-top: 12px;
   }
 }

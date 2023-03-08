@@ -45,13 +45,13 @@ const Footer = () => {
               <p className="footer-item-title m-0 pb-2">Follow us at</p>
               <ul className="d-flex gap-3 justify-content-center justify-content-md-start">
                 <li className="footer-item">
-                  <a href="https://www.linkedin.com/in/muhammad-brianjaya-andhika/" target="_blank">
+                  <a href="https://www.linkedin.com/in/muhammad-brianjaya-andhika/" target="_blank" rel="noopener noreferrer">
                     <FaLinkedin className="footer-icon" />
                   </a>
                 </li>
 
                 <li className="footer-item">
-                  <a href="https://github.com/brianjayaandhika" target="_blank">
+                  <a href="https://github.com/brianjayaandhika" target="_blank" rel="noopener noreferrer">
                     <FaGithub className="footer-icon" />
                   </a>
                 </li>

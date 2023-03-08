@@ -4,7 +4,7 @@
   background-size: cover;
   background-position: center;
   background-blend-mode: darken;
-  height: 100vh;
+
   border-top: 2px solid rgba(3, 172, 14, 0.1);
 }
 
@@ -99,7 +99,7 @@
 }
 
 .profile-modal-img {
-  width: 250px;
+  width: 60%;
   aspect-ratio: 1/1;
   border-radius: 50%;
 
@@ -112,4 +112,15 @@
 .profile-modal-btn {
   display: flex;
   margin: auto;
+}
+
+@media screen and (max-width: 576px) {
+  .modal {
+    --bs-modal-width: 90% !important;
+    padding: 24px;
+  }
+
+  .detail-review-control {
+    width: 80%;
+  }
 }

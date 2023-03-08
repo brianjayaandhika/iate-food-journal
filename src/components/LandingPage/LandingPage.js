@@ -7,7 +7,6 @@ import { FaStar, FaBookmark, FaPlusCircle } from "react-icons/fa";
 import axios from "axios";
 
 const LandingPage = () => {
-  const [foods, setFoods] = useState([]);
   const [mostFavorite, setMostFavorite] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -23,18 +22,12 @@ const LandingPage = () => {
     })
       .then((response) => {
         // console.log(response.data.data);
-        setFoods(response.data.data);
+        setMostFavorite(response.data.data.sort((a, b) => b.totalLikes - a.totalLikes).filter((e, i) => i < 3));
         setIsLoading(false);
       })
       .catch((error) => {
         console.log(error);
       });
-  };
-
-  // Get 3 Favorite Food
-  const getMostFavorite = () => {
-    setMostFavorite(foods.sort((a, b) => b.totalLikes - a.totalLikes).filter((e, i) => i < 3));
-    // state mostFavorite berisi 3 food dengan total likes terbanyak
   };
 
   // onClick for food details
@@ -44,10 +37,6 @@ const LandingPage = () => {
 
   useEffect(() => {
     getFoodList();
-
-    if (!isLoading) {
-      getMostFavorite();
-    }
   }, [isLoading]);
 
   return (
@@ -89,7 +78,7 @@ const LandingPage = () => {
                   className="d-flex flex-column align-items-center 
                  mb-md-4 mb-4 "
                 >
-                  <img src={food.imageUrl} onClick={() => onClickDetails(food)} className="favorite-img" />
+                  <img src={food.imageUrl} alt={food.name} onClick={() => onClickDetails(food)} className="favorite-img" />
                   <p className="favorite-text mt-3">{food.name}</p>
                 </Col>
               );

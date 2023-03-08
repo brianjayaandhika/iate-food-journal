@@ -13,7 +13,7 @@ const Header = () => {
   };
 
   const handleIsAdmin = () => {
-    localStorage.getItem("role") == "admin" ? setIsAdmin(true) : setIsAdmin(false);
+    localStorage.getItem("role") === "admin" ? setIsAdmin(true) : setIsAdmin(false);
   };
 
   // Logout
@@ -46,7 +46,7 @@ const Header = () => {
           console.log(error);
         });
     }
-  }, [isLogin, isAdmin]);
+  }, [isLogin, isAdmin, jwtToken]);
 
   return (
     <>

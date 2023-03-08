@@ -63,7 +63,8 @@
 
 .favorite-img {
   width: 350px;
-  height: 300px;
+
+  aspect-ratio: 1.16 / 1;
   border-radius: 16px;
 
   transition: scale 0.75ms box-shadow 0.75ms;
@@ -153,6 +154,35 @@
     line-height: 63px;
     letter-spacing: 0em;
     color: white;
+  }
+}
+
+@media screen and (max-height: 622px) {
+  .intro-brand {
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 99px;
+    letter-spacing: 0em;
+    color: var(--green-tp);
+    padding-top: 28px;
+  }
+
+  .intro-text {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 63px;
+    letter-spacing: 0em;
+    color: white;
+  }
+
+  .favorite-img {
+    width: 90%;
+    aspect-ratio: 1 / 1;
+    border-radius: 16px;
+
+    transition: scale 0.75ms box-shadow 0.75ms;
+
+    cursor: pointer;
   }
 }
 

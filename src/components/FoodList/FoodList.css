@@ -49,7 +49,7 @@
 .foodlist-rates {
   gap: 24px;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
 }
 
 .foodlist-rates-text {

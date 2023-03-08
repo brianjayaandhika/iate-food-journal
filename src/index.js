@@ -41,7 +41,7 @@ const auth = {
   },
   admin: (Component) => {
     const isLogin = localStorage.getItem("id") ? true : false;
-    const isAdmin = localStorage.getItem("role") == "admin" ? true : false;
+    const isAdmin = localStorage.getItem("role") === "admin" ? true : false;
     if (isLogin && isAdmin) {
       return <Component />;
     } else {
