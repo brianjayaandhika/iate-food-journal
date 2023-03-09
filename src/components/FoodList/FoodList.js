@@ -11,14 +11,8 @@ const FoodList = () => {
   const [foods, setFoods] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [toggleLike, setToggleLike] = useState(false);
-  const [isLogin, setIsLogin] = useState(false);
 
   const jwtToken = localStorage.getItem("token");
-
-  // handle isLogin
-  const handleLogin = () => {
-    localStorage.getItem("name") ? setIsLogin(true) : setIsLogin(false);
-  };
 
   // Get All Foods
   const getFoodList = useCallback(() => {
@@ -90,7 +84,6 @@ const FoodList = () => {
 
   useEffect(() => {
     getFoodList();
-    handleLogin();
   }, [getFoodList, toggleLike]);
   return (
     <>
