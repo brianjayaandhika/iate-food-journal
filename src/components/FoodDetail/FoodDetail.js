@@ -212,7 +212,7 @@ const FoodDetail = () => {
       url: `${process.env.REACT_APP_BASEURL}/api/v1/foods/${foodId}`,
       headers: {
         apiKey: `${process.env.REACT_APP_APIKEY}`,
-        Authorization: `Bearer ${jwtToken}`,
+        Authorization: `Bearer ${process.env.REACT_APP_JWTTOKEN}`,
       },
     })
       .then((response) => {
