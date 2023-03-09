@@ -10,7 +10,7 @@ import axios from "axios";
 const RegisterPage = () => {
   const formErrorStyle = { color: "red", fontSize: "14px", padding: "0", margin: "0" };
 
-  // Formik Login
+  // Formik Register
   const formik = useFormik({
     initialValues: {
       name: "",

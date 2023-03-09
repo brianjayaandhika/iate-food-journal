@@ -11,8 +11,14 @@ const FoodList = () => {
   const [foods, setFoods] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [toggleLike, setToggleLike] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
 
   const jwtToken = localStorage.getItem("token");
+
+  // handle isLogin
+  const handleLogin = () => {
+    localStorage.getItem("name") ? setIsLogin(true) : setIsLogin(false);
+  };
 
   // Get All Foods
   const getFoodList = useCallback(() => {
@@ -20,14 +26,13 @@ const FoodList = () => {
       method: "get",
       url: `${process.env.REACT_APP_BASEURL}/api/v1/foods`,
       headers: {
-        Authorization: `Bearer ${jwtToken || process.env.REACT_APP_JWTTOKEN}`,
         apiKey: `${process.env.REACT_APP_APIKEY}`,
+        Authorization: `Bearer ${jwtToken || process.env.REACT_APP_JWTTOKEN}`,
       },
     })
       .then((response) => {
         setFoods(response.data.data);
         setIsLoading(false);
-        // console.log(response.data.data);
       })
       .catch((error) => {
         console.log(error);
@@ -85,6 +90,7 @@ const FoodList = () => {
 
   useEffect(() => {
     getFoodList();
+    handleLogin();
   }, [getFoodList, toggleLike]);
   return (
     <>
