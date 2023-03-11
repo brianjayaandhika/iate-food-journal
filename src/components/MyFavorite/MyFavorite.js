@@ -86,59 +86,58 @@ const MyFavorite = () => {
 
   return (
     <>
-      <div className="favorite-section pb-5" style={likedFoods.length === 0 ? { height: "80vh" } : { height: "100%" }}>
+      <div className="favorite-section pb-5" style={likedFoods.length <= 4 ? { height: "80vh" } : { height: "100%" }}>
         <Header />
 
         {/* Taken from LandingPage - Favorite Section */}
-        <div className="pt-4 pb-5">
-          <Container>
-            <h1 className="foodlist-title mb-5 pt-3">My Favorites</h1>
-            {likedFoods.length > 0 ? (
-              <Row className="foodlist-row g-1">
-                {likedFoods.map((food, i) => {
-                  return (
-                    <Col
-                      key={i}
-                      xs={12}
-                      sm={6}
-                      md={6}
-                      lg={4}
-                      xl={4}
-                      xxl={3}
-                      className="d-flex flex-column align-items-center
+
+        <Container>
+          <h1 className="foodlist-title mb-5 pt-4">My Favorites</h1>
+          {likedFoods.length > 0 ? (
+            <Row className="foodlist-row g-1">
+              {likedFoods.map((food, i) => {
+                return (
+                  <Col
+                    key={i}
+                    xs={12}
+                    sm={6}
+                    md={6}
+                    lg={4}
+                    xl={4}
+                    xxl={3}
+                    className="d-flex flex-column align-items-center
                      mb-md-4 mb-4 foodlist-col"
-                    >
-                      <img src={food.imageUrl} alt={food.name} onClick={() => onClickDetails(food)} className="foodlist-img " />
-                      <p className="foodlist-text">{food.name}</p>
-                      <div className="foodlist-rates mb-3">
-                        <span className="foodlist-rates-text">
-                          <FaStar style={{ color: "gold" }} /> {food.rating}
-                        </span>
-                        <span className="foodlist-rates-text">
-                          <FaHeart
-                            className="foodlist-heart-icon"
-                            style={!food.isLike ? { color: "grey" } : { color: "red" }}
-                            onClick={() => {
-                              food.isLike ? handleUnlikeButton(food) : handleLikeButton(food);
-                            }}
-                          />
-                          {food.totalLikes}
-                        </span>
-                      </div>
-                    </Col>
-                  );
-                })}
-              </Row>
-            ) : (
-              <p className="favorite-text">
-                You have no liked foods! <br /> Explore more foods on <br />
-                <a href="/foods" className="regist-link">
-                  Food List
-                </a>
-              </p>
-            )}
-          </Container>
-        </div>
+                  >
+                    <img src={food.imageUrl} alt={food.name} onClick={() => onClickDetails(food)} className="foodlist-img " />
+                    <p className="foodlist-text">{food.name}</p>
+                    <div className="foodlist-rates mb-3">
+                      <span className="foodlist-rates-text">
+                        <FaStar style={{ color: "gold" }} /> {food.rating}
+                      </span>
+                      <span className="foodlist-rates-text">
+                        <FaHeart
+                          className="foodlist-heart-icon"
+                          style={!food.isLike ? { color: "grey" } : { color: "red" }}
+                          onClick={() => {
+                            food.isLike ? handleUnlikeButton(food) : handleLikeButton(food);
+                          }}
+                        />
+                        {food.totalLikes}
+                      </span>
+                    </div>
+                  </Col>
+                );
+              })}
+            </Row>
+          ) : (
+            <p className="favorite-text">
+              You have no liked foods! <br /> Explore more foods on <br />
+              <a href="/foods" className="regist-link">
+                Food List
+              </a>
+            </p>
+          )}
+        </Container>
       </div>
 
       <Footer />

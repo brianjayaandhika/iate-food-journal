@@ -33,9 +33,9 @@
     height: 200px;
   }
 }
-/* 
-@media screen and (max-width: 483px) {
-  .favorite-text {
-    font-size: 24px;
+
+@media screen and (max-width: 1400px) {
+  .favorite-section {
+    height: 100% !important;
   }
-} */
+}
