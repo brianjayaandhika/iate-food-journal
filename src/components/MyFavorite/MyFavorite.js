@@ -86,12 +86,10 @@ const MyFavorite = () => {
 
   return (
     <>
-      <div className="favorite-section pb-5" style={likedFoods.length <= 4 ? { height: "80vh" } : { height: "100%" }}>
+      <div className="favorite-section" style={{ height: "100%" }}>
         <Header />
 
-        {/* Taken from LandingPage - Favorite Section */}
-
-        <Container>
+        <Container className="pb-5 pt-3" style={{ height: "80vh", minHeight: "420px" }}>
           <h1 className="foodlist-title mb-5 pt-4">My Favorites</h1>
           {likedFoods.length > 0 ? (
             <Row className="foodlist-row g-1">
@@ -130,8 +128,8 @@ const MyFavorite = () => {
               })}
             </Row>
           ) : (
-            <div className="favorite-error-page pt-5">
-              <p className="favorite-text pt-5">Oops, there is nothing here!</p>
+            <div className="favorite-error-page pt-3">
+              <p className="favorite-text">Oops, there is nothing here!</p>
               <p className="favorite-text-2 mt-1 ">Go like some foods at our recipes page! </p>
 
               <Button className="btn-success  ps-4 pe-4 p-2" onClick={() => window.location.assign("/foods")}>
