@@ -66,7 +66,7 @@ const LandingPage = () => {
       {/* Favorite Section */}
       <div className="favorite-section pt-4 pb-5">
         <Container>
-          <h1 className="favorite-title mb-5 pt-3">Most Liked Foods</h1>
+          <h1 className="favorite-title mb-5 pt-3">Trending Recipes</h1>
           <Row className="favorite-row">
             {mostFavorite.map((food, i) => {
               return (

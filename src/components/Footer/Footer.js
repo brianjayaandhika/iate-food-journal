@@ -36,7 +36,7 @@ const Footer = () => {
                 ) : null}
                 <li>
                   <a className="footer-item" href="/foods">
-                    Food List
+                    Recipes
                   </a>
                 </li>
               </ul>

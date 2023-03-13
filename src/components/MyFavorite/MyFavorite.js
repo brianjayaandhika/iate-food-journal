@@ -4,7 +4,7 @@ import Footer from "../Footer/Footer";
 
 import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import { FaStar, FaHeart } from "react-icons/fa";
 
 const MyFavorite = () => {
@@ -130,12 +130,14 @@ const MyFavorite = () => {
               })}
             </Row>
           ) : (
-            <p className="favorite-text">
-              You have no liked foods! <br /> Explore more foods on <br />
-              <a href="/foods" className="regist-link">
-                Food List
-              </a>
-            </p>
+            <div className="favorite-error-page pt-5">
+              <p className="favorite-text pt-5">Oops, there is nothing here!</p>
+              <p className="favorite-text-2 mt-1 ">Go like some foods at our recipes page! </p>
+
+              <Button className="btn-success  ps-4 pe-4 p-2" onClick={() => window.location.assign("/foods")}>
+                Recipes
+              </Button>
+            </div>
           )}
         </Container>
       </div>

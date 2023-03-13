@@ -67,7 +67,7 @@ const Header = () => {
                 </Nav.Link>
               ) : null}
               <Nav.Link href="/foods" className="header-link">
-                Food List
+                Recipes
               </Nav.Link>
               {isAdmin ? (
                 <Nav.Link href="/add-food" className="header-link">

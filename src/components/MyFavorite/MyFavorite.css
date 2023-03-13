@@ -10,15 +10,26 @@
 }
 
 .favorite-text {
-  font-size: 29px;
+  font-size: 32px;
+  font-weight: 400;
   color: white;
-  text-decoration: none;
-
   opacity: 1;
 
-  padding-left: 12px;
-
   text-align: center;
+}
+
+.favorite-text-2 {
+  font-size: 24px;
+
+  color: white;
+  text-align: center;
+}
+
+.favorite-error-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .regist-link:hover {
@@ -31,11 +42,5 @@
   .foodlist-img {
     width: 250px;
     height: 200px;
-  }
-}
-
-@media screen and (max-width: 1400px) {
-  .favorite-section {
-    height: 100% !important;
   }
 }
