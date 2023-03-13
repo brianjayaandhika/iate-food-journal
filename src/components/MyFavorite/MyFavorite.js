@@ -86,10 +86,10 @@ const MyFavorite = () => {
 
   return (
     <>
-      <div className="favorite-section" style={{ height: "100%" }}>
+      <div className="favorite-section border-primary" style={{ height: "100%" }}>
         <Header />
 
-        <Container className="pb-5 pt-3" style={{ height: "80vh", minHeight: "420px" }}>
+        <Container className="pt-3 border-danger" style={{ height: "100%", minHeight: "420px", paddingBottom: "200px" }}>
           <h1 className="foodlist-title mb-5 pt-4">My Favorites</h1>
           {likedFoods.length > 0 ? (
             <Row className="foodlist-row g-1">
@@ -106,7 +106,7 @@ const MyFavorite = () => {
                     className="d-flex flex-column align-items-center
                      mb-md-4 mb-4 foodlist-col"
                   >
-                    <img src={food.imageUrl} alt={food.name} onClick={() => onClickDetails(food)} className="foodlist-img " />
+                    <img src={food.imageUrl} alt={food.name} onClick={() => onClickDetails(food)} className="foodlist-img img-fluid" />
                     <p className="foodlist-text">{food.name}</p>
                     <div className="foodlist-rates mb-3">
                       <span className="foodlist-rates-text">
