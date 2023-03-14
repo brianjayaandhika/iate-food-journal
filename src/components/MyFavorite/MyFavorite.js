@@ -86,7 +86,7 @@ const MyFavorite = () => {
 
   return (
     <>
-      <div className="favorite-section border-primary" style={{ height: "100%" }}>
+      <div className="favorite-section border-primary" style={{ height: "100%", paddingBottom: "200px" }}>
         <Header />
 
         <Container className="pt-3 border-danger" style={{ height: "100%", minHeight: "420px", paddingBottom: "200px" }}>

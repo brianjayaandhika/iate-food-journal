@@ -1,5 +1,5 @@
 import "./Footer.css";
-import { FaCopyright, FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { Row, Col, Container, InputGroup, Form, Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 
@@ -67,9 +67,7 @@ const Footer = () => {
               </InputGroup>
             </Col>
           </Row>
-          <h1 className="footer-copyright-text pt-4 ">
-            <FaCopyright /> Made by Muhammad Brianjaya Andhika
-          </h1>
+          <h1 className="footer-copyright-text pt-4 text-center">Made by Muhammad Brianjaya Andhika</h1>
         </Container>
       </div>
     </>
