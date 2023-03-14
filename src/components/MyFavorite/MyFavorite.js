@@ -86,10 +86,10 @@ const MyFavorite = () => {
 
   return (
     <>
-      <div className="favorite-section border-primary" style={{ height: "100%", paddingBottom: "200px" }}>
+      <div className="favorite-section " style={{ height: "100%", paddingBottom: "200px" }}>
         <Header />
 
-        <Container className="pt-3 border-danger" style={{ height: "100%", minHeight: "420px", paddingBottom: "200px" }}>
+        <Container className="pt-3 " style={{ height: "100%", minHeight: "420px", paddingBottom: "200px" }}>
           <h1 className="foodlist-title mb-5 pt-4">My Favorites</h1>
           {likedFoods.length > 0 ? (
             <Row className="foodlist-row g-1">
